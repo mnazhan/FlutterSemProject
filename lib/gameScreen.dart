@@ -1,13 +1,15 @@
 import 'package:cardgame/Functions/gameOMI.dart';
+import 'package:cardgame/cardnotations.dart';
 import 'package:flutter/material.dart';
+import 'package:playing_cards/playing_cards.dart';
 import 'main.dart';
 import 'screencardfunctions.dart';
 
 // List<PlayingCard> deck = standardFiftyTwoCardDeck();
-int player1cardNumber =8;
-int player2cardNumber =8;
-int player3cardNumber =8;
-int playerc4ardNumber =8;
+int player1cardNumber = 8;
+int player2cardNumber = 8;
+int player3cardNumber = 8;
+int playerc4ardNumber = 8;
 
 Game omi = Game();
 
@@ -33,7 +35,7 @@ class gamescreen extends StatelessWidget {
                 child: Container(
                   width: double.infinity,
                   color: Colors.green,
-                  child: createCardHand(8,omi.getPlayer1Cards()),
+                  child: createCardHand(8, omi.getPlayer1Cards()),
                 ),
               ),
               Expanded(
@@ -47,7 +49,7 @@ class gamescreen extends StatelessWidget {
                         color: Colors.yellow,
                         child: Transform.rotate(
                           angle: 90 * (3.1415926535 / 180),
-                          child: createCardHand(8,omi.getPlayer2Cards()),
+                          child: createCardHand(8, omi.getPlayer2Cards()),
                         ),
                       ),
                     ),
@@ -60,9 +62,11 @@ class gamescreen extends StatelessWidget {
                           children: [
                             Expanded(
                               child: Container(
-                                child: Text("C1"),
                                 color: Colors.red,
                                 width: double.infinity,
+                                child: Center(
+                                  child: CardNotations(1),
+                                ),
                               ),
                             ),
                             Expanded(
@@ -71,25 +75,30 @@ class gamescreen extends StatelessWidget {
                                   Expanded(
                                     flex: 2,
                                     child: Container(
-                                      child: Text("C1"),
                                       height: double.infinity,
                                       color: Colors.yellow,
+                                      child: Center(
+                                        child: CardNotations(1),
+                                      ),
                                     ),
                                   ),
                                   Expanded(
                                     flex: 1,
                                     child: Container(
-                                      child: Text("C1"),
                                       color: Colors.purple,
                                       height: double.infinity,
+                                      child:const Center(
+                                          child: Icon(Icons.diamond)),
                                     ),
                                   ),
                                   Expanded(
                                     flex: 2,
                                     child: Container(
-                                      child: Text("C1"),
                                       color: Colors.yellow,
                                       height: double.infinity,
+                                      child: Center(
+                                        child: CardNotations(1),
+                                      ),
                                     ),
                                   )
                                 ],
@@ -98,8 +107,10 @@ class gamescreen extends StatelessWidget {
                             Expanded(
                               child: Container(
                                 color: Colors.red,
-                                child: Text("c1"),
                                 width: double.infinity,
+                                child: Center(
+                                  child: CardNotations(1),
+                                ),
                               ),
                             )
                           ],
@@ -113,7 +124,7 @@ class gamescreen extends StatelessWidget {
                         color: Colors.yellow,
                         child: Transform.rotate(
                           angle: 90 * (3.1415926535 / 180),
-                          child:createCardHand(8,omi.getPlayer3Cards()),
+                          child: createCardHand(8, omi.getPlayer3Cards()),
                         ),
                       ),
                     )
@@ -123,10 +134,10 @@ class gamescreen extends StatelessWidget {
               Expanded(
                 flex: 1,
                 child: Container(
-                  width: double.infinity,
-                  color: Colors.green,
-                  child: createGCardHand(8,omi.getPlayer4Cards())),
-                ),
+                    width: double.infinity,
+                    color: Colors.green,
+                    child: createGCardHand(8, omi.getPlayer4Cards())),
+              ),
             ],
           )),
     );
