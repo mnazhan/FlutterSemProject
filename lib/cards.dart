@@ -8,14 +8,16 @@ ShapeBorder shape = RoundedRectangleBorder(
 class playingcard extends StatelessWidget {
   final Suit suit;
   final CardValue cardValue;
-  playingcard({required this.suit,required this.cardValue,});
+  final bool backFace;
+  playingcard({required this.suit,required this.cardValue,required this.backFace});
 
   @override
   Widget build(BuildContext context) {
     return PlayingCardView(
         card: PlayingCard(suit, cardValue),
-        showBack: false,
+        showBack: backFace,
         elevation: 1,
+        shape: shape,
         );
   }
 }

@@ -42,6 +42,7 @@ class Game {
   Game() {
     setCardDec();
     setPlayersCards();
+    setTrump();
   }
 
   void setBeginner(int value) {

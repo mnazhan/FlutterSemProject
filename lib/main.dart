@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'cards.dart';
 import 'gameScreen.dart';
 
 void main() {
