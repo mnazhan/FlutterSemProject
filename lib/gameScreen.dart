@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'main.dart';
 import 'screencardfunctions.dart';
 
-class gamescreen extends StatelessWidget {
-  const gamescreen({
-    super.key,
-    required this.widget,
-  });
-  final MyHomePage widget;
+class gamescreen extends StatefulWidget {
+  const gamescreen({Key? key}) : super(key: key);
 
+  @override
+  State<gamescreen> createState() => _gamescreenState();
+}
+
+class _gamescreenState extends State<gamescreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
           appBar: AppBar(
             backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-            title: Text(widget.title),
+            title:const Text("omi"),
           ),
           body: Column(
             children: [

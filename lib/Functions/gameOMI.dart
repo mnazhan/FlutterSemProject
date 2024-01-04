@@ -1,6 +1,5 @@
 import 'dart:math';
 import 'package:cardgame/Functions/player.dart';
-import 'package:flutter/cupertino.dart';
 
 class Game {
   late List<int> _cardDec;
