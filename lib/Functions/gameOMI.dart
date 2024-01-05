@@ -22,7 +22,13 @@ class Game {
   int _team2Point = 0; //Player 2 and Player 4
   int _beginner = 1;
   List<int> _turn = [1, 2, 3, 4];
+  int _player1Permission = 0;
 
+  Game() {
+    setCardDec();
+    setPlayersCards();
+    setTrump();
+  }
   void setCardDec() {
     int count = 32; //decsize
     int min = 1;
@@ -37,13 +43,12 @@ class Game {
     }
     _cardDec = uniqueNumbers.toList();
   }
-
-  Game() {
-    setCardDec();
-    setPlayersCards();
-    setTrump();
+  void setPlayer1Permission(int value){
+    _player1Permission=value;
   }
-
+  int getPlayer1Permission(){
+    return _player1Permission;
+  }
   void setBeginner(int value) {
     _beginner = value;
   }
@@ -909,6 +914,7 @@ class Game {
     }
     increaseRound();
     clearTable();
+    setPlayer1Permission(0);
   }
 
   void runRoundAutomatically() {
