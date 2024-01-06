@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:cardgame/Functions/gameOMI.dart';
-import '../CreateCardsForRouns.dart';
 import '../cardnotations.dart';
 import '../cards.dart';
 import '../screencardfunctions.dart';
-
 
 Widget createCardForRoundsOfPlayer1(int round){
   late List<int> turn;
@@ -194,13 +191,3 @@ Widget createCardForRoundsOfPlayer4(int round){
     }
   }
 }
-
-// Widget createCardsOfAllRounds(){
-//   int round = omi.getRound();
-//   for(int i=0;i<round;i++){
-//     return createCardRounds(Round: i,);
-//   }
-// }
-
-
-

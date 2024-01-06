@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'Functions/functionsOfViewPreviousCards.dart';
 
-
 class createCardRounds extends StatelessWidget {
   int Round;
   createCardRounds({required this.Round});

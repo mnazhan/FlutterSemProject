@@ -212,15 +212,6 @@ Text team2Points(){
   return Text("$points");
 }
 
-// bool checkPlayer1Permission (){
-//   int permission = omi.getPlayer1Permission();
-//   if(permission==0){
-//     return false;
-//   }else{
-//     return true;
-//   }
-// }
-
 int getBeginner(){
   return omi.getBeginner();
 }
