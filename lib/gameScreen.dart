@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'screencardfunctions.dart';
 
@@ -11,13 +10,9 @@ class gamescreen extends StatefulWidget {
 }
 
 class _gamescreenState extends State<gamescreen> {
-  // late Completer<int> _completer;
-
   @override
   void initState() {
     super.initState();
-    // Create the completer when the widget is initialized
-    // _completer = Completer<int>();
   }
 
   @override
@@ -48,7 +43,7 @@ class _gamescreenState extends State<gamescreen> {
                             int beiginner = omi.getBeginner();
                             print("Biginning player: $beiginner");
                             if (beiginner == 1) {
-                              print("game waiting for a user click");
+                              // print("game waiting for a user click");
                               await waitForPlayer1Permission();
                               await whenTrunIsf1();
                             } else if (beiginner == 2) {
@@ -193,7 +188,6 @@ class _gamescreenState extends State<gamescreen> {
                 color: Colors.green,
                 child: createCardHandForPlayer1(
                   () {
-                    // _completer.complete(2);
                     userPermission();
                     print("<<Player 1 card is pressed>>");
                   },
@@ -202,33 +196,25 @@ class _gamescreenState extends State<gamescreen> {
             ),
           ],
         ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            // Add your FAB's functionality here
+            print('Floating Action Button Pressed');
+          },
+          child: Icon(Icons.preview), // You can customize the icon
+        ),
       ),
     );
   }
 
   Future<void> whenTrunIsf1() async {
     setState(() {
-      // FutureBuilder(
-      //   future: _completer.future,
-      //   builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
-      //     if (snapshot.connectionState == ConnectionState.done) {
-      //       if (snapshot.hasData) {
-      //         print("Feature complete with : ${snapshot.data}");
-      //         setStartingCardForPlayer1ToTable();
-      //         print("player 1 to table");
-      //         return Text("Future completed with: ${snapshot.data}");
-      //       } else {
-      //         print("Flutter completed with no data ");
-      //         return Text("Future completed with no data");
-      //       }
-      //     } else {
-      //       print("future not completed yet");
-      //       return Text("Future not completed yet");
-      //     }
-      //   },
-      // );
-      setStartingCardForPlayer1ToTable();
-      print("player 1 to table");
+      int value = throwPlayer1CardWithTheTap();
+      // while (value != 0){
+      //   value=throwPlayer1CardWithTheTap();
+      // }
+      // setStartingCardForPlayer1ToTable();
+      print("player 1 to table : $value");
     });
     await Future.delayed(Duration(seconds: 2));
     setState(() {
@@ -267,11 +253,10 @@ class _gamescreenState extends State<gamescreen> {
       print("player 4 card");
     });
     await Future.delayed(Duration(seconds: 2));
-    print("game wait for user click");
+    // print("game wait for user click");
     await waitForPlayer1Permission();
     setState(() {
-      setCardForPlayer1ToTable();
-      print("player 1 card");
+      throwPlayer1CardForTapWithCheck();
     });
     await Future.delayed(Duration(seconds: 4));
     setState(() {
@@ -290,11 +275,10 @@ class _gamescreenState extends State<gamescreen> {
       print("player 4 card");
     });
     await Future.delayed(Duration(seconds: 2));
-    print("game wait for user click");
+    // print("game wait for user click");
     await waitForPlayer1Permission();
     setState(() {
-      setCardForPlayer1ToTable();
-      print("player 1 card");
+      throwPlayer1CardForTapWithCheck();
     });
     await Future.delayed(Duration(seconds: 2));
     setState(() {
@@ -313,11 +297,10 @@ class _gamescreenState extends State<gamescreen> {
       print("player 4 to table");
     });
     await Future.delayed(Duration(seconds: 2));
-    print("game wait for user click");
+    // print("game wait for user click");
     await waitForPlayer1Permission();
     setState(() {
-      setCardForPlayer1ToTable();
-      print("player 1 card");
+      throwPlayer1CardForTapWithCheck();
     });
     await Future.delayed(Duration(seconds: 2));
     setState(() {
@@ -333,5 +316,16 @@ class _gamescreenState extends State<gamescreen> {
     setState(() {
       findthewinningPlayer();
     });
+  }
+
+  Future<void> throwPlayer1CardForTapWithCheck() async {
+    int value = throwPlayer1CardWithTheTap();
+    while (value != 0) {
+      print("inside while");
+      await waitForPlayer1Permission();
+      print("recall function to throw palyer 1 card  ");
+      value = await throwPlayer1CardWithTheTap();
+    }
+    print("player 1 card");
   }
 }

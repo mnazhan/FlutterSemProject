@@ -23,6 +23,7 @@ class Game {
   int _beginner = 1;
   List<int> _turn = [1, 2, 3, 4];
   int _player1Permission = 0;
+  int _player1CardValue =0;
 
   Game() {
     setCardDec();
@@ -51,6 +52,16 @@ class Game {
   }
   void setBeginner(int value) {
     _beginner = value;
+  }
+  void setPlayer1cardValue (int value){
+    _player1CardValue=value;
+  }
+  int getPlayer1CardValue(){
+    return _player1CardValue;
+  }
+  void resetPlayer1CardValue(){
+    _player1CardValue=0;
+    print("Player 1 card value : $_player1CardValue");
   }
 
   int getBeginner() {
@@ -684,6 +695,78 @@ class Game {
     return updatedCards;
   }
 
+  void throwPlayer1CardManually(int value) {
+    List<int> player1CardHand = getPlayer1Cards();
+    List<int> card1Values = [];
+    List<int> card2Values = [];
+    List<int> card3Values = [];
+    List<int> card4Values = [];
+    late int FirstCardKindom;
+    late int valueKind;
+    if(_Table.length==0){
+      setTable(value);
+      player1CardHand.remove(value);
+    }else{
+      for (int i = 0; i < player1CardHand.length; i++) {
+        if (player1CardHand[i] > 0 && player1CardHand[i] < 9) {
+          card1Values.add(player1CardHand[i]);
+        } else if (player1CardHand[i] > 8 && player1CardHand[i] < 17) {
+          card2Values.add(player1CardHand[i]);
+        } else if (player1CardHand[i] > 16 && player1CardHand[i] < 25) {
+          card3Values.add(player1CardHand[i]);
+        } else if (player1CardHand[i] > 24 && player1CardHand[i] < 33) {
+          card4Values.add(player1CardHand[i]);
+        }
+      }
+      int FirstCardOfTheRound = _Table[0];
+      FirstCardKindom = getValueKindom(FirstCardOfTheRound);
+      valueKind = getValueKindom(value);
+      if (FirstCardKindom==valueKind){
+        setTable(value);
+        player1CardHand.remove(value);
+      }else{
+        late int valueKindCardNo;
+        if(valueKind == 1){
+          valueKindCardNo=card1Values.length;
+        }else if(valueKind==2){
+          valueKindCardNo=card2Values.length;
+        }else if(valueKind==3){
+          valueKindCardNo=card3Values.length;
+        }else {
+          valueKindCardNo=card4Values.length;
+        }
+        if(valueKindCardNo==0){
+          setTable(value);
+          player1CardHand.remove(value);
+        }else{
+          print("<<<choose an acceptable card>>>");
+          setTable(value);
+          player1CardHand.remove(value);
+          // resetPlayer1CardValue();
+          // setPlayer1Permission(0);
+        }
+      }
+    }
+    setPlayer1Cards(player1CardHand);
+  }
+
+  int getValueKindom(int value){
+    late int kindom;
+    if (value > 0 && value < 9) {
+      kindom = 1; //Spade
+    } else if (value > 8 && value < 17) {
+      kindom = 2; //Heart
+    } else if (value > 16 && value < 25) {
+      kindom = 3; //Clubs
+    } else if (value > 24 && value < 33) {
+      kindom = 4; //Diamond
+    } else {
+      print("first card kindom finding error in throw player 1 card manually faction gameOMI.dart");
+      kindom = -1;
+    }
+    return kindom;
+  }
+
   void findTheWinner(List<int> value) {
     int largeValue = value[0];
     int largeIndex = 0;
@@ -912,6 +995,7 @@ class Game {
     } else {
       setRound8();
     }
+    resetPlayer1CardValue();
     increaseRound();
     clearTable();
     setPlayer1Permission(0);

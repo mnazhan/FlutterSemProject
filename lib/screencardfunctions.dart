@@ -23,11 +23,17 @@ List<Widget> GcardHand(List<int>value,VoidCallback onTapCallback) {
         child: CardNotations(value[i],false),
         onTap: (){
           onTapCallback();
+          omi.setPlayer1cardValue(value[i]);
         },
       ),
     );
   }
   return cardsForPlayer;
+}
+
+int getCardValue(int value){
+  print("card value is : $value");
+  return value;
 }
 
 FlatCardFan createCardHand(List<int>values) {
@@ -206,14 +212,14 @@ Text team2Points(){
   return Text("$points");
 }
 
-bool checkPlayer1Permission (){
-  int permission = omi.getPlayer1Permission();
-  if(permission==0){
-    return false;
-  }else{
-    return true;
-  }
-}
+// bool checkPlayer1Permission (){
+//   int permission = omi.getPlayer1Permission();
+//   if(permission==0){
+//     return false;
+//   }else{
+//     return true;
+//   }
+// }
 
 int getBeginner(){
   return omi.getBeginner();
@@ -227,6 +233,18 @@ void userPermission(){
 Future<void> waitForPlayer1Permission() async {
   while (omi.getPlayer1Permission() != 1) {
     // Simulate waiting for the variable to become 1
+    print("game waits for a user input");
     await Future.delayed(Duration(milliseconds: 100));
   }
+}
+
+int throwPlayer1CardWithTheTap() {
+  int returnvalue=0;
+  int value = omi.getPlayer1CardValue();
+  omi.throwPlayer1CardManually(value);
+  if(omi.getPlayer1CardValue()==0){
+    returnvalue=1;
+  }
+  print("<<screenFunctions.dart throw player1 card with tap");
+  return returnvalue;
 }
