@@ -16,6 +16,14 @@ class Game {
   List<int> _Round6 = [];
   List<int> _Round7 = [];
   List<int> _Round8 = [];
+  List<int> _round1Turn =[];
+  List<int> _round2Turn =[];
+  List<int> _round3Turn =[];
+  List<int> _round4Turn =[];
+  List<int> _round5Turn =[];
+  List<int> _round6Turn =[];
+  List<int> _round7Turn =[];
+  List<int> _round8Turn =[];
   late int _Trump;
   int _Round = 1;
   int _team1Point = 0; //Player 1 and Player 3
@@ -131,6 +139,32 @@ class Game {
 
   void setRound1() {
     _Round1 = _Table;
+    _round1Turn=_turn;
+  }
+
+  List<int> getRound1Turn(){
+    return _round1Turn;
+  }
+  List<int> getRound2Turn(){
+    return _round2Turn;
+  }
+  List<int> getRound3Turn(){
+    return _round3Turn;
+  }
+  List<int> getRound4Turn(){
+    return _round4Turn;
+  }
+  List<int> getRound5Turn(){
+    return _round5Turn;
+  }
+  List<int> getRound6Turn(){
+    return _round6Turn;
+  }
+  List<int> getRound7Turn(){
+    return _round7Turn;
+  }
+  List<int> getRound8Turn(){
+    return _round8Turn;
   }
 
   List<int> getRound1() {
@@ -139,6 +173,7 @@ class Game {
 
   void setRound2() {
     _Round2 = _Table;
+    _round2Turn=_turn;
   }
 
   List<int> getRound2() {
@@ -147,6 +182,7 @@ class Game {
 
   void setRound3() {
     _Round3 = _Table;
+    _round3Turn=_turn;
   }
 
   List<int> getRound3() {
@@ -155,6 +191,7 @@ class Game {
 
   void setRound4() {
     _Round4 = _Table;
+    _round4Turn=_turn;
   }
 
   List<int> getRound4() {
@@ -163,6 +200,7 @@ class Game {
 
   void setRound5() {
     _Round5 = _Table;
+    _round5Turn=_turn;
   }
 
   List<int> getRound5() {
@@ -171,6 +209,7 @@ class Game {
 
   void setRound6() {
     _Round6 = _Table;
+    _round6Turn=_turn;
   }
 
   List<int> getRound6() {
@@ -179,6 +218,7 @@ class Game {
 
   void setRound7() {
     _Round7 = _Table;
+    _round7Turn=_turn;
   }
 
   List<int> getRound7() {
@@ -187,6 +227,7 @@ class Game {
 
   void setRound8() {
     _Round8 = _Table;
+    _round8Turn=_turn;
   }
 
   List<int> getRound8() {
@@ -999,6 +1040,7 @@ class Game {
     increaseRound();
     clearTable();
     setPlayer1Permission(0);
+    // increaseRound();
   }
 
   void runRoundAutomatically() {

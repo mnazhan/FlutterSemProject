@@ -200,6 +200,7 @@ class _gamescreenState extends State<gamescreen> {
           onPressed: () {
             // Add your FAB's functionality here
             print('Floating Action Button Pressed');
+            Navigator.pushNamed(context, '/first');
           },
           child: Icon(Icons.preview), // You can customize the icon
         ),

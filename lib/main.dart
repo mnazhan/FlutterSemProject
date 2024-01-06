@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => gamescreen(),
-        '/first': (context)=> cardsOfPreviousRounds(),
+        '/first': (context) => cardsOfPreviousRounds(),
       },
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -26,6 +26,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-
-
