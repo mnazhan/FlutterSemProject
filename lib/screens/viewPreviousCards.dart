@@ -1,7 +1,4 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:playing_cards/playing_cards.dart';
-import 'package:cardgame/Functions/functionsOfViewPreviousCards.dart';
 import '../CreateCardsForRouns.dart';
 import '../screencardfunctions.dart';
 
@@ -51,8 +48,6 @@ class _cardsOfPreviousRoundsState extends State<cardsOfPreviousRounds> {
                     createCardRounds(Round: 7,),
                   if(round>=8)
                     createCardRounds(Round: 8,),
-                  // createCardRounds(Round: 3,),
-                  // createCardRounds(Round: 4,),
                 ],
               )
             ],
@@ -62,34 +57,3 @@ class _cardsOfPreviousRoundsState extends State<cardsOfPreviousRounds> {
     );
   }
 }
-
-//
-// class cardsOfPreviousRounds extends StatelessWidget {
-//   const cardsOfPreviousRounds({Key? key}) : super(key: key);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return SafeArea(
-//       child: Scaffold(
-//         appBar: AppBar(
-//           title:const Text("Previous Cards"),
-//           centerTitle: true,
-//         ),
-//         body: Column(
-//           children: [
-//             Column(
-//               children: [
-//                 if(round==1)
-//                   createCardRounds(Round: 1,),
-//                 if(round==2)
-//                   createCardRounds(Round: 2,),
-//                 // createCardRounds(Round: 3,),
-//                 // createCardRounds(Round: 4,),
-//               ],
-//             )
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
