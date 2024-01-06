@@ -214,3 +214,19 @@ bool checkPlayer1Permission (){
     return true;
   }
 }
+
+int getBeginner(){
+  return omi.getBeginner();
+}
+
+void userPermission(){
+  print("<<<Player1 permission is set>>>");
+  omi.setPlayer1Permission(1);
+}
+
+Future<void> waitForPlayer1Permission() async {
+  while (omi.getPlayer1Permission() != 1) {
+    // Simulate waiting for the variable to become 1
+    await Future.delayed(Duration(milliseconds: 100));
+  }
+}

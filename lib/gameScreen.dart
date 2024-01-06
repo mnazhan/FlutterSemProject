@@ -13,7 +13,6 @@ class gamescreen extends StatefulWidget {
 class _gamescreenState extends State<gamescreen> {
   // late Completer<int> _completer;
 
-
   @override
   void initState() {
     super.initState();
@@ -43,26 +42,28 @@ class _gamescreenState extends State<gamescreen> {
                 Row(
                   children: [
                     FilledButton(
-                      child: const Text("Play"),
-                      onPressed: () async {
-                        for (int i = 0; i < 8; i++) {
-                          int beiginner = omi.getBeginner();
-                          print("Biginning player: $beiginner");
-                          if (beiginner == 1) {
-                            await whenTrunIsf1();
-                          } else if (beiginner == 2) {
-                            await whenTrunIsf2();
-                          } else if (beiginner == 3) {
-                            await whenTrunIsf3();
-                          } else {
-                            await whenTrunIsf4();
+                        child: const Text("Play"),
+                        onPressed: () async {
+                          for (int i = 0; i < 8; i++) {
+                            int beiginner = omi.getBeginner();
+                            print("Biginning player: $beiginner");
+                            if (beiginner == 1) {
+                              print("game waiting for a user click");
+                              await waitForPlayer1Permission();
+                              await whenTrunIsf1();
+                            } else if (beiginner == 2) {
+                              await whenTrunIsf2();
+                            } else if (beiginner == 3) {
+                              await whenTrunIsf3();
+                            } else {
+                              await whenTrunIsf4();
+                            }
+                            await Future.delayed(Duration(seconds: 2), () {
+                              print(
+                                  'This code runs after a delay of 2 seconds');
+                            });
                           }
-                          await Future.delayed(Duration(seconds: 2), () {
-                            print('This code runs after a delay of 2 seconds');
-                          });
-                        }
-                      }
-                    ),
+                        }),
                     const SizedBox(
                       width: 5,
                     ),
@@ -191,9 +192,10 @@ class _gamescreenState extends State<gamescreen> {
                 width: double.infinity,
                 color: Colors.green,
                 child: createCardHandForPlayer1(
-                  ()  {
+                  () {
                     // _completer.complete(2);
-                    print("Helo world");
+                    userPermission();
+                    print("<<Player 1 card is pressed>>");
                   },
                 ),
               ),
@@ -265,6 +267,8 @@ class _gamescreenState extends State<gamescreen> {
       print("player 4 card");
     });
     await Future.delayed(Duration(seconds: 2));
+    print("game wait for user click");
+    await waitForPlayer1Permission();
     setState(() {
       setCardForPlayer1ToTable();
       print("player 1 card");
@@ -286,6 +290,8 @@ class _gamescreenState extends State<gamescreen> {
       print("player 4 card");
     });
     await Future.delayed(Duration(seconds: 2));
+    print("game wait for user click");
+    await waitForPlayer1Permission();
     setState(() {
       setCardForPlayer1ToTable();
       print("player 1 card");
@@ -307,6 +313,8 @@ class _gamescreenState extends State<gamescreen> {
       print("player 4 to table");
     });
     await Future.delayed(Duration(seconds: 2));
+    print("game wait for user click");
+    await waitForPlayer1Permission();
     setState(() {
       setCardForPlayer1ToTable();
       print("player 1 card");
