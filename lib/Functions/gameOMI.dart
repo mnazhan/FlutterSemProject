@@ -24,7 +24,7 @@ class Game {
   List<int> _round6Turn =[];
   List<int> _round7Turn =[];
   List<int> _round8Turn =[];
-  late int _Trump;
+  int _Trump=0;
   int _Round = 1;
   int _team1Point = 0; //Player 1 and Player 3
   int _team2Point = 0; //Player 2 and Player 4
@@ -36,7 +36,7 @@ class Game {
   Game() {
     setCardDec();
     setPlayersCards();
-    setTrump();
+    // setTrump();
   }
   void setCardDec() {
     int count = 32; //decsize
@@ -232,6 +232,10 @@ class Game {
 
   List<int> getRound8() {
     return _Round8;
+  }
+
+  void setTrumpManulay(int value){
+    _Trump=value;
   }
 
   void setTrump() {

@@ -10,7 +10,6 @@ class cardsOfPreviousRounds extends StatefulWidget {
 }
 
 class _cardsOfPreviousRoundsState extends State<cardsOfPreviousRounds> {
-  @override
   late int round;
   void initState() {
     super.initState();
@@ -57,3 +56,4 @@ class _cardsOfPreviousRoundsState extends State<cardsOfPreviousRounds> {
     );
   }
 }
+

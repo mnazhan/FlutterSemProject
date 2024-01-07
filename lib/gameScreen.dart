@@ -39,6 +39,7 @@ class _gamescreenState extends State<gamescreen> {
                     FilledButton(
                         child: const Text("Play"),
                         onPressed: () async {
+                          await _dialogBuilder(context);
                           for (int i = 0; i < 8; i++) {
                             int beiginner = omi.getBeginner();
                             print("Biginning player: $beiginner");
@@ -211,10 +212,6 @@ class _gamescreenState extends State<gamescreen> {
   Future<void> whenTrunIsf1() async {
     setState(() {
       int value = throwPlayer1CardWithTheTap();
-      // while (value != 0){
-      //   value=throwPlayer1CardWithTheTap();
-      // }
-      // setStartingCardForPlayer1ToTable();
       print("player 1 to table : $value");
     });
     await Future.delayed(Duration(seconds: 2));
@@ -328,5 +325,70 @@ class _gamescreenState extends State<gamescreen> {
       value = await throwPlayer1CardWithTheTap();
     }
     print("player 1 card");
+  }
+
+  Future<void> _dialogBuilder(BuildContext context) {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Select Trump'),
+          content: Container(
+            height: 70,
+            child:createCardHandForPlayer1FirstFourCards(),
+          ),
+          actions: <Widget>[
+            TextButton(
+              style: TextButton.styleFrom(
+                textStyle: Theme.of(context).textTheme.labelLarge,
+              ),
+              child: const Text('S'),
+              onPressed: () {
+                setState(() {
+                  setTrumpManuallyWhenUserSelect(1);
+                });
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              style: TextButton.styleFrom(
+                textStyle: Theme.of(context).textTheme.labelLarge,
+              ),
+              child: const Text('H'),
+              onPressed: () {
+                setState(() {
+                  setTrumpManuallyWhenUserSelect(2);
+                });
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              style: TextButton.styleFrom(
+                textStyle: Theme.of(context).textTheme.labelLarge,
+              ),
+              child: const Text('C'),
+              onPressed: () {
+                setState(() {
+                  setTrumpManuallyWhenUserSelect(3);
+                });
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              style: TextButton.styleFrom(
+                textStyle: Theme.of(context).textTheme.labelLarge,
+              ),
+              child: const Text('D'),
+              onPressed: () {
+                setState(() {
+                  setTrumpManuallyWhenUserSelect(4);
+                });
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }

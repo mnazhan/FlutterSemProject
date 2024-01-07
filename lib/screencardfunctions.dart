@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:playing_cards/playing_cards.dart';
 import 'cards.dart';
@@ -11,6 +12,14 @@ List<playingcard> cardHand(List<int> values) {
   List<playingcard> cardsForPlayer = [];
   for (int i = 0; i < values.length; i++) {
     cardsForPlayer.add(CardNotations(values[i],true));
+  }
+  return cardsForPlayer;
+}
+
+List<playingcard> player1First4Cards(List<int> values) {
+  List<playingcard> cardsForPlayer = [];
+  for (int i = 0; i < values.length; i++) {
+    cardsForPlayer.add(CardNotations(values[i],false));
   }
   return cardsForPlayer;
 }
@@ -39,13 +48,20 @@ int getCardValue(int value){
 FlatCardFan createCardHand(List<int>values) {
   return FlatCardFan(children: cardHand(values));
 }
-
+FlatCardFan createCardHandForTrumpSelection(List<int>values) {
+  return FlatCardFan(children: player1First4Cards(values));
+}
 FlatCardFan createGCardHand(List<int> values,VoidCallback onTapCallback) {
   return FlatCardFan(children: GcardHand(values,onTapCallback));
 }
 
 FlatCardFan createCardHandForPlayer1(VoidCallback onTapCallback){
   FlatCardFan cardHand = createGCardHand(omi.getPlayer1Cards(),onTapCallback);
+  return cardHand;
+}
+
+FlatCardFan createCardHandForPlayer1FirstFourCards(){
+  FlatCardFan cardHand = createCardHandForTrumpSelection(omi.getPlayer1FirstCards());
   return cardHand;
 }
 
@@ -148,17 +164,20 @@ Widget createCardForTableOfPlayer4(){
   }
 }
 
-FaIcon trumpShape(){
+Widget trumpShape(){
   int trump=omi.getTrump();
-  FaIcon icon ;
+  Widget icon ;
   if(trump==1){
-    icon = const FaIcon(FontAwesomeIcons.solidHandSpock);
+    icon =  Icon(Icons.energy_savings_leaf);
   }else if(trump == 2){
     icon=const FaIcon(FontAwesomeIcons.solidHeart);
   }else if (trump ==3){
     icon=const FaIcon(FontAwesomeIcons.solidThumbsUp);
-  }else{
-    icon=const FaIcon(FontAwesomeIcons.solidGem);
+  }else if(trump==4){
+    icon=const Icon(Icons.diamond);
+  }
+  else{
+    icon=const Icon(Icons.downloading);
   }
   return icon;
 }
@@ -238,4 +257,8 @@ int throwPlayer1CardWithTheTap() {
   }
   print("<<screenFunctions.dart throw player1 card with tap");
   return returnvalue;
+}
+
+void setTrumpManuallyWhenUserSelect(int value){
+  omi.setTrumpManulay(value);
 }
