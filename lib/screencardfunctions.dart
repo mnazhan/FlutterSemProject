@@ -2,7 +2,6 @@ import 'package:cardgame/Functions/team.dart';
 import 'package:cardgame/gameScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:playing_cards/playing_cards.dart';
 import 'cards.dart';
 import 'cardnotations.dart';
@@ -213,20 +212,20 @@ Widget createCardForTableOfPlayer4(){
 
 Widget trumpShape(){
   int trump=omi.getTrump();
-  Widget icon ;
+  Widget widget ;
   if(trump==1){
-    icon =  Icon(Icons.energy_savings_leaf);
+    widget =  const Image(image:AssetImage("assets/spades.png"));
   }else if(trump == 2){
-    icon=const FaIcon(FontAwesomeIcons.solidHeart);
+    widget=const Image(image:AssetImage("assets/heart.png"));
   }else if (trump ==3){
-    icon=const FaIcon(FontAwesomeIcons.solidThumbsUp);
+    widget=const Image(image:AssetImage("assets/clubs.png"));
   }else if(trump==4){
-    icon=const Icon(Icons.diamond);
+    widget=const Image(image:AssetImage("assets/diamond.png"));
   }
   else{
-    icon=const Text("");
+    widget=const Text("");
   }
-  return icon;
+  return widget;
 }
 
 void setStartingCardForPlayer1ToTable(){

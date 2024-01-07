@@ -20,3 +20,9 @@ const Kround = TextStyle(
   fontSize: 18,
   color: Colors.white,
 );
+
+const KtitleStyle = TextStyle(
+  fontSize: 40,
+  fontWeight: FontWeight.bold,
+  color: Color(0XFFCCD5DE),
+);

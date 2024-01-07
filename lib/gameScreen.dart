@@ -40,34 +40,37 @@ class _gamescreenState extends State<gamescreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF272D2D),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      // color: Colors.teal.shade700,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 2, horizontal: 5),
-                        child: Row(children: [
-                          const CircleAvatar(
-                            radius: 20,
-                            child: Icon(Icons.person),
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Text(
-                            "We",
-                            style: Kteam,
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Container(
-                            child: team1Points(),
-                          )
-                        ]),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 4.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF272D2D),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        // color: Colors.teal.shade700,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 2, horizontal: 5),
+                          child: Row(children: [
+                            const CircleAvatar(
+                              radius: 20,
+                              child: Icon(Icons.person),
+                            ),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            const Text(
+                              "We",
+                              style: Kteam,
+                            ),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            Container(
+                              child: team1Points(),
+                            )
+                          ]),
+                        ),
                       ),
                     ),
                     Row(
@@ -77,7 +80,7 @@ class _gamescreenState extends State<gamescreen> {
                               style: FilledButton.styleFrom(
                                   backgroundColor: const Color(0xFF272D2D),
                                   elevation: 5),
-                              child: const Text("Play"),
+                              child: const Text("Play",),
                               onPressed: () async {
                                 setState(() {
                                   hidePlayButton = 1;
@@ -544,59 +547,91 @@ class _gamescreenState extends State<gamescreen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Select Trump',),
+          title: const Text('Select Trump'),
           content: Container(
             height: 100,
             child: createCardHandForPlayer1FirstFourCards(),
           ),
           actions: <Widget>[
-            TextButton(
-              style: TextButton.styleFrom(
-                textStyle: Theme.of(context).textTheme.labelLarge,
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
               ),
-              child: const Text('S'),
-              onPressed: () {
-                setState(() {
-                  setTrumpManuallyWhenUserSelect(1);
-                });
-                Navigator.of(context).pop();
-              },
+              width: 50,
+              height: 50,
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  textStyle: Theme.of(context).textTheme.labelLarge,
+                ),
+                child: const Image(image:AssetImage("assets/spades.png")),
+                onPressed: () {
+                  setState(() {
+                    setTrumpManuallyWhenUserSelect(1);
+                  });
+                  Navigator.of(context).pop();
+                },
+              ),
             ),
-            TextButton(
-              style: TextButton.styleFrom(
-                textStyle: Theme.of(context).textTheme.labelLarge,
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
               ),
-              child: const Text('H'),
-              onPressed: () {
-                setState(() {
-                  setTrumpManuallyWhenUserSelect(2);
-                });
-                Navigator.of(context).pop();
-              },
+              height: 50,
+              width: 50,
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  textStyle: Theme.of(context).textTheme.labelLarge,
+                ),
+                child: const Image(image:AssetImage("assets/heart.png")),
+                onPressed: () {
+                  setState(() {
+                    setTrumpManuallyWhenUserSelect(2);
+                  });
+                  Navigator.of(context).pop();
+                },
+              ),
             ),
-            TextButton(
-              style: TextButton.styleFrom(
-                textStyle: Theme.of(context).textTheme.labelLarge,
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
               ),
-              child: const Text('C'),
-              onPressed: () {
-                setState(() {
-                  setTrumpManuallyWhenUserSelect(3);
-                });
-                Navigator.of(context).pop();
-              },
+              height: 50,
+              width: 50,
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  textStyle: Theme.of(context).textTheme.labelLarge,
+                ),
+                child: const Image(image:AssetImage("assets/clubs.png")),
+                onPressed: () {
+                  setState(() {
+                    setTrumpManuallyWhenUserSelect(3);
+                  });
+                  Navigator.of(context).pop();
+                },
+              ),
             ),
-            TextButton(
-              style: TextButton.styleFrom(
-                textStyle: Theme.of(context).textTheme.labelLarge,
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
               ),
-              child: const Text('D'),
-              onPressed: () {
-                setState(() {
-                  setTrumpManuallyWhenUserSelect(4);
-                });
-                Navigator.of(context).pop();
-              },
+              height: 50,
+              width: 50,
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  textStyle: Theme.of(context).textTheme.labelLarge,
+                ),
+                child: const Image(image:AssetImage("assets/diamond.png")),
+                onPressed: () {
+                  setState(() {
+                    setTrumpManuallyWhenUserSelect(4);
+                  });
+                  Navigator.of(context).pop();
+                },
+              ),
             ),
           ],
         );

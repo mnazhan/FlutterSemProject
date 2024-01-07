@@ -15,16 +15,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       initialRoute: '/',
       routes: {
-        '/': (context) => startScreen(),
-        '/first': (context) => gamescreen(),
-        '/second': (context) => cardsOfPreviousRounds(),
+        '/': (context) => const startScreen(),
+        '/first': (context) => const gamescreen(),
+        '/second': (context) => const cardsOfPreviousRounds(),
       },
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      // home:const gamescreen(),
     );
   }
 }
