@@ -47,6 +47,7 @@ class _gamescreenState extends State<gamescreen> {
                               hidePlayButton = 1;
                             });
                             await _dialogBuilderForTrumpSelection(context);
+                            await Future.delayed(Duration(seconds: 1));
                             for (int i = 0; i < 8; i++) {
                               int beiginner = omi.getBeginner();
                               print("Biginning player: $beiginner");
@@ -61,10 +62,10 @@ class _gamescreenState extends State<gamescreen> {
                               } else {
                                 await whenTrunIsf4();
                               }
-                              await Future.delayed(Duration(seconds: 2), () {
-                                print(
-                                    'This code runs after a delay of 2 seconds');
-                              });
+                              // await Future.delayed(Duration(seconds: 2), () {
+                              //   print(
+                              //       'This code runs after a delay of 2 seconds');
+                              // });
                             }
                           }),
                     const SizedBox(
@@ -221,22 +222,22 @@ class _gamescreenState extends State<gamescreen> {
       int value = throwPlayer1CardWithTheTap();
       print("player 1 to table : $value");
     });
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 1));
     setState(() {
       setCardForPlayer2ToTable();
       print("player 2 card");
     });
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 1));
     setState(() {
       setCardForPlayer3ToTable();
       print("player 3 card");
     });
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 1));
     setState(() {
       setCardForPlayer4ToTable();
       print("player 4 card");
     });
-    await Future.delayed(Duration(seconds: 4));
+    await Future.delayed(Duration(seconds: 2));
     setState(() {
       findthewinningPlayer();
     });
@@ -247,23 +248,23 @@ class _gamescreenState extends State<gamescreen> {
       setStartingCardForPlayer2ToTable();
       print("player 2 to table");
     });
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 1));
     setState(() {
       setCardForPlayer3ToTable();
       print("player 3 card");
     });
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 1));
     setState(() {
       setCardForPlayer4ToTable();
       print("player 4 card");
     });
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 3));
     // print("game wait for user click");
     await waitForPlayer1Permission();
     setState(() {
       throwPlayer1CardForTapWithCheck();
     });
-    await Future.delayed(Duration(seconds: 4));
+    await Future.delayed(Duration(seconds: 2));
     setState(() {
       findthewinningPlayer();
     });
@@ -274,23 +275,23 @@ class _gamescreenState extends State<gamescreen> {
       setStartingCardForPlayer3ToTable();
       print("player 3 to table");
     });
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 1));
     setState(() {
       setCardForPlayer4ToTable();
       print("player 4 card");
     });
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 3));
     // print("game wait for user click");
     await waitForPlayer1Permission();
     setState(() {
       throwPlayer1CardForTapWithCheck();
     });
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 1));
     setState(() {
       setCardForPlayer2ToTable();
       print("player 2 card");
     });
-    await Future.delayed(Duration(seconds: 4));
+    await Future.delayed(Duration(seconds: 2));
     setState(() {
       findthewinningPlayer();
     });
@@ -301,23 +302,23 @@ class _gamescreenState extends State<gamescreen> {
       setStartingCardForPlayer4ToTable();
       print("player 4 to table");
     });
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 3));
     // print("game wait for user click");
     await waitForPlayer1Permission();
     setState(() {
       throwPlayer1CardForTapWithCheck();
     });
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 1));
     setState(() {
       setCardForPlayer2ToTable();
       print("player 2 card");
     });
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 1));
     setState(() {
       setCardForPlayer3ToTable();
       print("player 3 card");
     });
-    await Future.delayed(Duration(seconds: 4));
+    await Future.delayed(Duration(seconds: 2));
     setState(() {
       findthewinningPlayer();
     });
@@ -418,7 +419,7 @@ class _gamescreenState extends State<gamescreen> {
           ],
         );
       },
-    );
+    )
   }
 
   Future<void> waitForPlayer1Permission() async {
@@ -426,7 +427,7 @@ class _gamescreenState extends State<gamescreen> {
     while (omi.getPlayer1Permission() != 1) {
       // Simulate waiting for the variable to become 1
       print("game waits for a user input");
-      await Future.delayed(Duration(seconds: 2));
+      await Future.delayed(const Duration(microseconds: 100));
     }
   }
 }
