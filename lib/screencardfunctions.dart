@@ -1,4 +1,5 @@
 import 'package:cardgame/Functions/team.dart';
+import 'package:cardgame/gameScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -6,10 +7,11 @@ import 'package:playing_cards/playing_cards.dart';
 import 'cards.dart';
 import 'cardnotations.dart';
 import 'package:cardgame/Functions/gameOMI.dart';
+import 'constans.dart';
 
 Team team1=Team();
 Team team2=Team();
-
+int terminateGame =0;
 int gameTurn =1;
 int beginnerOfTheTurn=1;
 
@@ -74,8 +76,10 @@ List<Widget> GcardHand(List<int>value,VoidCallback onTapCallback) {
       GestureDetector(
         child: CardNotations(value[i],false),
         onTap: (){
+          if(userPermissionNeed==1){
+            omi.setPlayer1cardValue(value[i]);
+          }
           onTapCallback();
-          omi.setPlayer1cardValue(value[i]);
         },
       ),
     );
@@ -128,7 +132,7 @@ Widget createCardForTableOfPlayer1(){
   List<int> table= omi.getTable();
   int player1Index=-1;
   if (table.length==0){
-    return const Text("Table is Null ");
+    return const Text("");
   }else{
     for(int i=0;i<turn.length;i++){
       if(turn[i]==1){
@@ -136,7 +140,7 @@ Widget createCardForTableOfPlayer1(){
       }
     }
     if(player1Index+1>table.length){
-      return const Text("Table is Null ");
+      return const Text("");
     }else{
       playingcard card = CardNotations(table[player1Index], false);
       return card;
@@ -149,7 +153,7 @@ Widget createCardForTableOfPlayer2(){
   List<int> table= omi.getTable();
   int player1Index=-1;
   if (table.length==0){
-    return const Text("Table is Null ");
+    return const Text("");
   }else{
     for(int i=0;i<turn.length;i++){
       if(turn[i]==2){
@@ -157,7 +161,7 @@ Widget createCardForTableOfPlayer2(){
       }
     }
     if(player1Index+1>table.length){
-      return const Text("Table is Null ");
+      return const Text("");
     }else{
       playingcard card = CardNotations(table[player1Index], false);
       return card;
@@ -170,7 +174,7 @@ Widget createCardForTableOfPlayer3(){
   List<int> table= omi.getTable();
   int player1Index=-1;
   if (table.length==0){
-    return const Text("Table is Null ");
+    return const Text("");
   }else{
     for(int i=0;i<turn.length;i++){
       if(turn[i]==3){
@@ -178,7 +182,7 @@ Widget createCardForTableOfPlayer3(){
       }
     }
     if(player1Index+1>table.length){
-      return const Text("Table is Null ");
+      return const Text("");
     }else{
       playingcard card = CardNotations(table[player1Index], false);
       return card;
@@ -191,7 +195,7 @@ Widget createCardForTableOfPlayer4(){
   List<int> table= omi.getTable();
   int player1Index=-1;
   if (table.length==0){
-    return const Text("Table is Null ");
+    return const Text("");
   }else{
     for(int i=0;i<turn.length;i++){
       if(turn[i]==4){
@@ -199,7 +203,7 @@ Widget createCardForTableOfPlayer4(){
       }
     }
     if(player1Index+1>table.length){
-      return const Text("Table is Null ");
+      return const Text("");
     }else{
       playingcard card = CardNotations(table[player1Index], false);
       return card;
@@ -220,7 +224,7 @@ Widget trumpShape(){
     icon=const Icon(Icons.diamond);
   }
   else{
-    icon=const Icon(Icons.downloading);
+    icon=const Text("");
   }
   return icon;
 }
@@ -267,11 +271,11 @@ void findthewinningPlayer(){
 
 Text team1Points(){
   int points =omi.getPointOfTeam1();
-  return Text("$points");
+  return Text("$points",style: KteamStyle,);
 }
 Text team2Points(){
   int points =omi.getPointOfTeam2();
-  return Text("$points");
+  return Text("$points",style: KteamStyle,);
 }
 
 int getBeginner(){
@@ -671,3 +675,11 @@ Widget CreateCountingCardsForTeam2(){
   }
   return row;
 }
+
+void checkGameTerminate(){
+  if(team1.getCountingCards()<=0||team2.getCountingCards()<=0){
+    terminateGame=1;
+    print("Terminate Game");
+  }
+}
+

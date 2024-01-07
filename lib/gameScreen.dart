@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'constans.dart';
 import 'screencardfunctions.dart';
 
 int hideNextButton = 1;
 int hidePlayButton = 0;
-int userPermissionNeed =0;
+int userPermissionNeed = 0;
 
 class gamescreen extends StatefulWidget {
   const gamescreen({Key? key}) : super(key: key);
@@ -23,217 +25,386 @@ class _gamescreenState extends State<gamescreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Row(children: [
-                  Container(
-                    color: Colors.blue,
-                    child: Text("Team 1 -"),
-                  ),
-                  Container(
-                    color: Colors.blue,
-                    child: team1Points(),
-                  )
-                ]),
-                Row(
+        body: Container(
+          color: const Color(0xFF141E1D),
+          // decoration:const BoxDecoration(
+          //   image: DecorationImage(
+          //     image: AssetImage('assets/background.jpeg'), // Replace with your image asset path
+          //     fit: BoxFit.cover,
+          //   ),
+          // ),
+          child: Column(
+            children: [
+              Container(
+                color: const Color(0xFF446063),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    if (hidePlayButton == 0)
-                      FilledButton(
-                          child: const Text("Play"),
-                          onPressed: () async {
-                            setState(() {
-                              hidePlayButton = 1;
-                            });
-                            int beiginnerForTrump = omi.getBeginner();
-                            if(beiginnerForTrump==1) {
-                              await _dialogBuilderForTrumpSelection(context);
-                            }
-                            await Future.delayed(const Duration(seconds: 1));
-                            for (int i = 0; i < 8; i++) {
-                              int beiginner = omi.getBeginner();
-                              print("Biginning player: $beiginner");
-                              if (beiginner == 1) {
-                                // print("game waiting for a user click");
-                                userPermissionNeed=1;
-                                await waitForPlayer1Permission();
-                                await whenTrunIsf1();
-                              } else if (beiginner == 2) {
-                                await whenTrunIsf2();
-                              } else if (beiginner == 3) {
-                                await whenTrunIsf3();
-                              } else {
-                                await whenTrunIsf4();
-                              }
-                            }
-                            Text text=findTheWinningTeam();
-                            await _dialogBuilderForWinNote(context,text);
-                            setState(() {
-                              hideNextButton =0;
-                            });
-                          }),
-                    const SizedBox(
-                      width: 5,
+                    Container(
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF272D2D),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      // color: Colors.teal.shade700,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 2, horizontal: 5),
+                        child: Row(children: [
+                          const CircleAvatar(
+                            radius: 20,
+                            child: Icon(Icons.person),
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            "We",
+                            style: Kteam,
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Container(
+                            child: team1Points(),
+                          )
+                        ]),
+                      ),
                     ),
-                    if(hideNextButton==0)
-                      FilledButton(
-                      child: const Text("Next"),
-                      onPressed: () {
-                        hideNextButton=1;
-                        hidePlayButton=0;
-                        setState(() {
-                          if(gameTurn==5||gameTurn==9 || gameTurn==13||gameTurn==17){
-                            startGameWhenPlayer1Turn();
-                          }else{
-                            startGame();
-                          }
-                        });
-                      },
+                    Row(
+                      children: [
+                        if (hidePlayButton == 0)
+                          FilledButton(
+                              style: FilledButton.styleFrom(
+                                  backgroundColor: const Color(0xFF272D2D),
+                                  elevation: 5),
+                              child: const Text("Play"),
+                              onPressed: () async {
+                                setState(() {
+                                  hidePlayButton = 1;
+                                });
+                                int beiginnerForTrump = omi.getBeginner();
+                                if (beiginnerForTrump == 1) {
+                                  await _dialogBuilderForTrumpSelection(
+                                      context);
+                                }
+                                await Future.delayed(
+                                    const Duration(seconds: 1));
+                                for (int i = 0; i < 8; i++) {
+                                  int beiginner = omi.getBeginner();
+                                  print("Biginning player: $beiginner");
+                                  if (beiginner == 1) {
+                                    // print("game waiting for a user click");
+                                    userPermissionNeed = 1;
+                                    await waitForPlayer1Permission();
+                                    await whenTrunIsf1();
+                                  } else if (beiginner == 2) {
+                                    await whenTrunIsf2();
+                                  } else if (beiginner == 3) {
+                                    await whenTrunIsf3();
+                                  } else {
+                                    await whenTrunIsf4();
+                                  }
+                                }
+                                Text text = findTheWinningTeam();
+                                await _dialogBuilderForWinNote(context, text);
+                                setState(() {
+                                  hideNextButton = 0;
+                                });
+                              }),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        if (hideNextButton == 0)
+                          FilledButton(
+                            style: FilledButton.styleFrom(
+                                backgroundColor: const Color(0xFF272D2D),
+                                elevation: 5),
+                            child: const Text("Next"),
+                            onPressed: () {
+                              hideNextButton = 1;
+                              hidePlayButton = 0;
+                              setState(() {
+                                if (gameTurn == 5 ||
+                                    gameTurn == 9 ||
+                                    gameTurn == 13 ||
+                                    gameTurn == 17) {
+                                  startGameWhenPlayer1Turn();
+                                } else {
+                                  startGame();
+                                }
+                              });
+                              if (terminateGame == 1) {
+                                if (team1.getCountingCards() <= 1) {
+                                  _dialogBuilderForFinalNote(
+                                      context, const Text("We lost the game"));
+                                } else {
+                                  _dialogBuilderForFinalNote(
+                                      context, const Text("We won the game"));
+                                }
+                              }
+                            },
+                          ),
+                      ],
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF272D2D),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 2, horizontal: 5),
+                        child: Row(children: [
+                          const CircleAvatar(
+                            radius: 20,
+                            child: Icon(Icons.person),
+                          ),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          const Text(
+                            "Others",
+                            style: Kteam,
+                          ),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          Container(
+                            child: team2Points(),
+                          )
+                        ]),
+                      ),
                     ),
                   ],
                 ),
-                Row(children: [
-                  Container(
-                    color: Colors.blue,
-                    child: Text("Team 2 -"),
-                  ),
-                  Container(
-                    color: Colors.blue,
-                    child: team2Points(),
-                  )
-                ]),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                CreateCountingCardsForTeam1(),
-                CreateCountingCardsForTeam2(),
-              ],
-            ),
-            Expanded(
-              flex: 1,
-              child: Container(
-                width: double.infinity,
-                color: Colors.green,
-                child: createCardHandForPlayer3(),
               ),
-            ),
-            Expanded(
-              flex: 2,
-              child: Row(
+              const SizedBox(
+                height: 15,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Expanded(
-                    flex: 1,
-                    child: Container(
-                      height: 100,
-                      color: Colors.yellow,
-                      child: Transform.rotate(
-                        angle: 90 * (3.1415926535 / 180),
-                        child: createCardHandForPlayer4(),
+                  Container(
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFCCD5DE),
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 2,
-                    child: Container(
-                      height: double.infinity,
-                      color: Colors.brown,
-                      child: Column(
-                        children: [
-                          Expanded(
-                            child: Container(
-                              color: Colors.red,
-                              width: double.infinity,
-                              child: Center(
-                                child: createCardForTableOfPlayer3(),
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  flex: 2,
-                                  child: Container(
-                                    height: double.infinity,
-                                    color: Colors.yellow,
-                                    child: Center(
-                                      child: createCardForTableOfPlayer4(),
-                                    ),
-                                  ),
-                                ),
-                                Expanded(
-                                  flex: 1,
-                                  child: Container(
-                                    color: Colors.purple,
-                                    height: double.infinity,
-                                    child: Center(child: trumpShape()),
-                                  ),
-                                ),
-                                Expanded(
-                                  flex: 2,
-                                  child: Container(
-                                    color: Colors.yellow,
-                                    height: double.infinity,
-                                    child: Center(
-                                      child: createCardForTableOfPlayer2(),
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          Expanded(
-                            child: Container(
-                              color: Colors.red,
-                              width: double.infinity,
-                              child: Center(
-                                child: createCardForTableOfPlayer1(),
-                              ),
-                            ),
-                          )
-                        ],
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 5.0, horizontal: 2),
+                        child: CreateCountingCardsForTeam1(),
+                      )),
+                  Container(
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFCCD5DE),
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Container(
-                      //Player 2
-                      height: 100,
-                      color: Colors.yellow,
-                      child: Transform.rotate(
-                        angle: 90 * (3.1415926535 / 180),
-                        child: createCardHandForPlayer2(),
-                      ),
-                    ),
-                  )
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 5.0, horizontal: 2),
+                        child: CreateCountingCardsForTeam2(),
+                      )),
                 ],
               ),
-            ),
-            Expanded(
-              flex: 1,
-              child: Container(
-                width: double.infinity,
-                color: Colors.green,
-                child: createCardHandForPlayer1(
-                  () {
-                    if(userPermissionNeed==1){
-                      userPermission();
-                      print("<<Player 1 card is pressed>>");
-                      userPermissionNeed =0;
-                    }else{
-                      print("Wait for your turn");
-                      _dialogBuilderForWaitForTurnNote(context);
-                    }
-                  },
+              const SizedBox(
+                height: 30,
+              ),
+              const Center(
+                child: Text(
+                  "Player 3",
+                  style: KplayerStyle,
                 ),
               ),
-            ),
-          ],
+              Container(
+                decoration: BoxDecoration(
+                  color: const Color(0xFF446062),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                height: 110,
+                width: 210,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 3, 17, 3),
+                  child: createCardHandForPlayer3(),
+                ),
+              ),
+              Expanded(
+                flex: 2,
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const SizedBox(
+                              height: 40,
+                            ),
+                            const Text(
+                              "Player 4",
+                              style: KteamStyle,
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            Container(
+                              height: 110,
+                              decoration: BoxDecoration(
+                                color: const Color(0xFF446062),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.fromLTRB(0, 2, 0, 10),
+                                child: Transform.rotate(
+                                  angle: 90 * (3.1415926535 / 180),
+                                  child: createCardHandForPlayer4(),
+                                ),
+                              ),
+                            ),
+                          ]),
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: Container(
+                        height: double.infinity,
+                        // color: Colors.brown,
+                        child: Column(
+                          children: [
+                            Expanded(
+                              child: Container(
+                                // color: Colors.red,
+                                width: double.infinity,
+                                child: Center(
+                                  child: createCardForTableOfPlayer3(),
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    flex: 2,
+                                    child: Container(
+                                      height: double.infinity,
+                                      // color: Colors.yellow,
+                                      child: Center(
+                                        child: createCardForTableOfPlayer4(),
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    flex: 1,
+                                    child: Container(
+                                      height: double.infinity,
+                                      child: Center(
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            color:const Color(0xFFCCD5DE),
+                                            borderRadius: BorderRadius.circular(20),
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(5.0),
+                                            child: trumpShape(),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    flex: 2,
+                                    child: Container(
+                                      // color: Colors.yellow,
+                                      height: double.infinity,
+                                      child: Center(
+                                        child: createCardForTableOfPlayer2(),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                            Expanded(
+                              child: Container(
+                                // color: Colors.red,
+                                width: double.infinity,
+                                child: Center(
+                                  child: createCardForTableOfPlayer1(),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Column(children: [
+                        const SizedBox(
+                          height: 40,
+                        ),
+                        const Text(
+                          "Player 2",
+                          style: KteamStyle,
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Container(
+                          //Player 2
+                          height: 110,
+                          decoration: BoxDecoration(
+                            color: const Color(0xFF446062),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 2, 0, 10),
+                            child: Transform.rotate(
+                              angle: 90 * (3.1415926535 / 180),
+                              child: createCardHandForPlayer2(),
+                            ),
+                          ),
+                        ),
+                      ]),
+                    )
+                  ],
+                ),
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  color: const Color(0xFF446062),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                height: 170,
+                width: 380,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 5, 40, 5),
+                  child: createCardHandForPlayer1(
+                    () {
+                      if (userPermissionNeed == 1) {
+                        userPermission();
+                        print("<<Player 1 card is pressed>>");
+                        userPermissionNeed = 0;
+                      } else {
+                        print("Wait for your turn");
+                        _dialogBuilderForWaitForTurnNote(context);
+                      }
+                    },
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              const Center(
+                child: Text(
+                  "You",
+                  style: KplayerStyle,
+                ),
+              ),
+              const SizedBox(
+                height: 35,
+              )
+            ],
+          ),
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
@@ -290,7 +461,7 @@ class _gamescreenState extends State<gamescreen> {
     });
     await Future.delayed(Duration(seconds: 3));
     // print("game wait for user click");
-    userPermissionNeed=1;
+    userPermissionNeed = 1;
     await waitForPlayer1Permission();
     setState(() {
       throwPlayer1CardForTapWithCheck();
@@ -313,7 +484,7 @@ class _gamescreenState extends State<gamescreen> {
     });
     await Future.delayed(Duration(seconds: 3));
     // print("game wait for user click");
-    userPermissionNeed=1;
+    userPermissionNeed = 1;
     await waitForPlayer1Permission();
     setState(() {
       throwPlayer1CardForTapWithCheck();
@@ -336,7 +507,7 @@ class _gamescreenState extends State<gamescreen> {
     });
     await Future.delayed(Duration(seconds: 3));
     // print("game wait for user click");
-    userPermissionNeed=1;
+    userPermissionNeed = 1;
     await waitForPlayer1Permission();
     setState(() {
       throwPlayer1CardForTapWithCheck();
@@ -373,9 +544,9 @@ class _gamescreenState extends State<gamescreen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Select Trump'),
+          title: const Text('Select Trump',),
           content: Container(
-            height: 70,
+            height: 100,
             child: createCardHandForPlayer1FirstFourCards(),
           ),
           actions: <Widget>[
@@ -456,19 +627,19 @@ class _gamescreenState extends State<gamescreen> {
   }
 
   Future<void> waitForPlayer1Permission() async {
-    int value =0;
-      while (omi.getPlayer1Permission() != 1) {
-        if (value==0){
-          _dialogBuilderForUserInputNotification(context);
-          value++;
-        }
-        // Simulate waiting for the variable to become 1
-        print("game waits for a user input");
-        await Future.delayed(const Duration(microseconds: 100));
+    int value = 0;
+    while (omi.getPlayer1Permission() != 1) {
+      if (value == 0) {
+        _dialogBuilderForUserInputNotification(context);
+        value++;
       }
+      // Simulate waiting for the variable to become 1
+      print("game waits for a user input");
+      await Future.delayed(const Duration(microseconds: 100));
+    }
   }
 
-  Future<void> _dialogBuilderForWinNote(BuildContext context,Text value) {
+  Future<void> _dialogBuilderForWinNote(BuildContext context, Text value) {
     return showDialog<void>(
       context: context,
       builder: (BuildContext context) {
@@ -489,6 +660,7 @@ class _gamescreenState extends State<gamescreen> {
       },
     );
   }
+
   Future<void> _dialogBuilderForWaitForTurnNote(BuildContext context) {
     return showDialog<void>(
       context: context,
@@ -510,6 +682,38 @@ class _gamescreenState extends State<gamescreen> {
       },
     );
   }
+
+  Future<void> _dialogBuilderForFinalNote(BuildContext context, Text value) {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: value,
+          actions: <Widget>[
+            TextButton(
+              style: TextButton.styleFrom(
+                textStyle: Theme.of(context).textTheme.labelLarge,
+              ),
+              child: const Text('close'),
+              onPressed: () {
+                SystemNavigator.pop();
+              },
+            ),
+            TextButton(
+              style: TextButton.styleFrom(
+                textStyle: Theme.of(context).textTheme.labelLarge,
+              ),
+              child: const Text('Play again'),
+              onPressed: () {
+                Navigator.of(context).pop();
+                setState(() {
+                  startGameWhenPlayer1Turn();
+                });
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 }
-
-

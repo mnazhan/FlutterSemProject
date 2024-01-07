@@ -9,14 +9,17 @@ class startScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-          body: Center(
-            child: FilledButton(
-              child: Text("Start"),
-              onPressed: (){
-                print("Move to Game screen");
-                startGameWhenPlayer1Turn();
-                Navigator.pushNamed(context, '/first');
-              },
+          body: Container(
+            color: const Color(0xFF272D2D),
+            child: Center(
+              child: FilledButton(
+                child: Text("Start"),
+                onPressed: (){
+                  print("Move to Game screen");
+                  startGameWhenPlayer1Turn();
+                  Navigator.pushNamed(context, '/first');
+                },
+              ),
             ),
           ),
         ));

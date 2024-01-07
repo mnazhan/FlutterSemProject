@@ -1,3 +1,4 @@
+import 'package:cardgame/constans.dart';
 import 'package:flutter/material.dart';
 import 'Functions/functionsOfViewPreviousCards.dart';
 
@@ -8,11 +9,14 @@ class createCardRounds extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.brown,
+      color: const Color(0xFF141E1D),
       child: Column(
         children: [
           Container(
-            child: Text("Round $Round"),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 5.0),
+              child: Text("Round $Round",style: Kround,),
+            ),
           ),
           Container(
             height: 100,
