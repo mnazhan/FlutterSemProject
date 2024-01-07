@@ -2,6 +2,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'screencardfunctions.dart';
 
+int hideStartButton = 0;
+int hidePlayButton = 0;
+
 class gamescreen extends StatefulWidget {
   const gamescreen({Key? key}) : super(key: key);
 
@@ -36,30 +39,34 @@ class _gamescreenState extends State<gamescreen> {
                 ]),
                 Row(
                   children: [
-                    FilledButton(
-                        child: const Text("Play"),
-                        onPressed: () async {
-                          await _dialogBuilder(context);
-                          for (int i = 0; i < 8; i++) {
-                            int beiginner = omi.getBeginner();
-                            print("Biginning player: $beiginner");
-                            if (beiginner == 1) {
-                              // print("game waiting for a user click");
-                              await waitForPlayer1Permission();
-                              await whenTrunIsf1();
-                            } else if (beiginner == 2) {
-                              await whenTrunIsf2();
-                            } else if (beiginner == 3) {
-                              await whenTrunIsf3();
-                            } else {
-                              await whenTrunIsf4();
-                            }
-                            await Future.delayed(Duration(seconds: 2), () {
-                              print(
-                                  'This code runs after a delay of 2 seconds');
+                    if (hidePlayButton == 0)
+                      FilledButton(
+                          child: const Text("Play"),
+                          onPressed: () async {
+                            setState(() {
+                              hidePlayButton = 1;
                             });
-                          }
-                        }),
+                            await _dialogBuilderForTrumpSelection(context);
+                            for (int i = 0; i < 8; i++) {
+                              int beiginner = omi.getBeginner();
+                              print("Biginning player: $beiginner");
+                              if (beiginner == 1) {
+                                // print("game waiting for a user click");
+                                await waitForPlayer1Permission();
+                                await whenTrunIsf1();
+                              } else if (beiginner == 2) {
+                                await whenTrunIsf2();
+                              } else if (beiginner == 3) {
+                                await whenTrunIsf3();
+                              } else {
+                                await whenTrunIsf4();
+                              }
+                              await Future.delayed(Duration(seconds: 2), () {
+                                print(
+                                    'This code runs after a delay of 2 seconds');
+                              });
+                            }
+                          }),
                     const SizedBox(
                       width: 5,
                     ),
@@ -327,7 +334,7 @@ class _gamescreenState extends State<gamescreen> {
     print("player 1 card");
   }
 
-  Future<void> _dialogBuilder(BuildContext context) {
+  Future<void> _dialogBuilderForTrumpSelection(BuildContext context) {
     return showDialog<void>(
       context: context,
       builder: (BuildContext context) {
@@ -335,7 +342,7 @@ class _gamescreenState extends State<gamescreen> {
           title: const Text('Select Trump'),
           content: Container(
             height: 70,
-            child:createCardHandForPlayer1FirstFourCards(),
+            child: createCardHandForPlayer1FirstFourCards(),
           ),
           actions: <Widget>[
             TextButton(
@@ -390,5 +397,36 @@ class _gamescreenState extends State<gamescreen> {
         );
       },
     );
+  }
+
+  Future<void> _dialogBuilderForUserInputNotification(BuildContext context) {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Select your card'),
+          actions: <Widget>[
+            TextButton(
+              style: TextButton.styleFrom(
+                textStyle: Theme.of(context).textTheme.labelLarge,
+              ),
+              child: const Text('close'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> waitForPlayer1Permission() async {
+    _dialogBuilderForUserInputNotification(context);
+    while (omi.getPlayer1Permission() != 1) {
+      // Simulate waiting for the variable to become 1
+      print("game waits for a user input");
+      await Future.delayed(Duration(seconds: 2));
+    }
   }
 }

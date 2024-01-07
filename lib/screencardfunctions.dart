@@ -240,13 +240,6 @@ void userPermission(){
   omi.setPlayer1Permission(1);
 }
 
-Future<void> waitForPlayer1Permission() async {
-  while (omi.getPlayer1Permission() != 1) {
-    // Simulate waiting for the variable to become 1
-    print("game waits for a user input");
-    await Future.delayed(Duration(milliseconds: 100));
-  }
-}
 
 int throwPlayer1CardWithTheTap() {
   int returnvalue=0;
