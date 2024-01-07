@@ -46,7 +46,9 @@ class _gamescreenState extends State<gamescreen> {
                             setState(() {
                               hidePlayButton = 1;
                             });
-                            await _dialogBuilderForTrumpSelection(context);
+                            int beiginnerForTrump = omi.getBeginner();
+                            if(beiginnerForTrump==1)
+                              await _dialogBuilderForTrumpSelection(context);
                             await Future.delayed(Duration(seconds: 1));
                             for (int i = 0; i < 8; i++) {
                               int beiginner = omi.getBeginner();
@@ -77,7 +79,11 @@ class _gamescreenState extends State<gamescreen> {
                         hideNextButton=1;
                         hidePlayButton=0;
                         setState(() {
-                          startGame();
+                          if(gameTurn==5||gameTurn==9 || gameTurn==13||gameTurn==17){
+                            startGameWhenPlayer1Turn();
+                          }else{
+                            startGame();
+                          }
                         });
                       },
                     ),

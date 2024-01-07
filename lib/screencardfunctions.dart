@@ -6,16 +6,35 @@ import 'cards.dart';
 import 'cardnotations.dart';
 import 'package:cardgame/Functions/gameOMI.dart';
 
-Game omi=Game();
+int gameTurn =1;
+int beginnerOfTheTurn=1;
+
+void findTheBeginnersForTurn(){
+  if(gameTurn==1||gameTurn==5||gameTurn==9||gameTurn==13||gameTurn==17){
+    beginnerOfTheTurn=1;
+  }else if(gameTurn==2||gameTurn==6||gameTurn==10||gameTurn==14||gameTurn==18){
+    beginnerOfTheTurn=2;
+  }else if(gameTurn==3||gameTurn==7||gameTurn==11||gameTurn==15||gameTurn==19){
+    beginnerOfTheTurn=3;
+  }else if(gameTurn==4||gameTurn==8||gameTurn==12||gameTurn==16||gameTurn==20){
+    beginnerOfTheTurn=4;
+  }
+}
+
+Game omi=Game(beginnerOfTheTurn);
 
 Game newGame(){
-  Game temp=Game();
+  findTheBeginnersForTurn();
+  Game temp=Game(beginnerOfTheTurn);
   temp.setTrump();
+  gameTurn++;
   return temp;
 }
 
 Game newGameWhenPlayer1Trump(){
-  Game temp=Game();
+  findTheBeginnersForTurn();
+  Game temp=Game(1);
+  gameTurn++;
   // omi.setTrump();
   return temp;
 }

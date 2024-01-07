@@ -28,14 +28,16 @@ class Game {
   int _Round = 1;
   int _team1Point = 0; //Player 1 and Player 3
   int _team2Point = 0; //Player 2 and Player 4
-  int _beginner = 1;
+  late int _beginner;
   List<int> _turn = [1, 2, 3, 4];
   int _player1Permission = 0;
   int _player1CardValue =0;
 
-  Game() {
+  Game(int value) {
     setCardDec();
     setPlayersCards();
+    setBeginner(value);
+    setTurn(value);
     // setTrump();
   }
   void setCardDec() {
