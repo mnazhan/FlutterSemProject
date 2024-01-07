@@ -1,3 +1,4 @@
+import 'package:cardgame/Functions/team.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -5,6 +6,9 @@ import 'package:playing_cards/playing_cards.dart';
 import 'cards.dart';
 import 'cardnotations.dart';
 import 'package:cardgame/Functions/gameOMI.dart';
+
+Team team1=Team();
+Team team2=Team();
 
 int gameTurn =1;
 int beginnerOfTheTurn=1;
@@ -279,7 +283,6 @@ void userPermission(){
   omi.setPlayer1Permission(1);
 }
 
-
 int throwPlayer1CardWithTheTap() {
   int returnvalue=0;
   int value = omi.getPlayer1CardValue();
@@ -293,4 +296,40 @@ int throwPlayer1CardWithTheTap() {
 
 void setTrumpManuallyWhenUserSelect(int value){
   omi.setTrumpManulay(value);
+}
+
+Text findTheWinningTeam(){
+  late Text text;
+  int pointsOfTeam1 = omi.getPointOfTeam1();
+  int pointsOfTeam2 = omi.getPointOfTeam2();
+  if(beginnerOfTheTurn==1||beginnerOfTheTurn==3){
+    if(pointsOfTeam1>pointsOfTeam2){
+      print("Team 1 won the Turn");
+      text=const Text("We won the turn\nget 1 counting card");
+      team2.reduce1CountingCard();
+    }else if(pointsOfTeam1 <pointsOfTeam2){
+      text =const Text("We lose the turn\ngive 2 counting card");
+      team1.reduce2CountingCards();
+      print("Team 2 won the Turn");
+    }else{
+      print("Turn is tied");
+      text = const Text("Tie ");
+    }
+  }else{
+    if(pointsOfTeam1>pointsOfTeam2){
+      print("Team 1 won the Turn");
+      text=const Text("We won the turn\nget 2 counting cards");
+      team2.reduce2CountingCards();
+    }else if(pointsOfTeam1 <pointsOfTeam2){
+      text =const Text("We lose the turn\ngive 1 counting card");
+      team1.reduce1CountingCard();
+      print("Team 2 won the Turn");
+    }else{
+      print("Turn is tied");
+      text = const Text("Tie ");
+    }
+  }
+  print("Team 1 counting cards : ${team1.getCountingCards()}");
+  print("Team 2 counting cards : ${team2.getCountingCards()}");
+  return text;
 }

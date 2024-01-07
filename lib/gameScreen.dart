@@ -47,9 +47,10 @@ class _gamescreenState extends State<gamescreen> {
                               hidePlayButton = 1;
                             });
                             int beiginnerForTrump = omi.getBeginner();
-                            if(beiginnerForTrump==1)
+                            if(beiginnerForTrump==1) {
                               await _dialogBuilderForTrumpSelection(context);
-                            await Future.delayed(Duration(seconds: 1));
+                            }
+                            await Future.delayed(const Duration(seconds: 1));
                             for (int i = 0; i < 8; i++) {
                               int beiginner = omi.getBeginner();
                               print("Biginning player: $beiginner");
@@ -65,6 +66,8 @@ class _gamescreenState extends State<gamescreen> {
                                 await whenTrunIsf4();
                               }
                             }
+                            Text text=findTheWinningTeam();
+                            await _dialogBuilderForWinNote(context,text);
                             setState(() {
                               hideNextButton =0;
                             });
@@ -441,5 +444,27 @@ class _gamescreenState extends State<gamescreen> {
       print("game waits for a user input");
       await Future.delayed(const Duration(microseconds: 100));
     }
+  }
+
+  Future<void> _dialogBuilderForWinNote(BuildContext context,Text value) {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: value,
+          actions: <Widget>[
+            TextButton(
+              style: TextButton.styleFrom(
+                textStyle: Theme.of(context).textTheme.labelLarge,
+              ),
+              child: const Text('close'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }
