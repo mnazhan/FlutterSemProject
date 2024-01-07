@@ -80,7 +80,9 @@ class _gamescreenState extends State<gamescreen> {
                               style: FilledButton.styleFrom(
                                   backgroundColor: const Color(0xFF272D2D),
                                   elevation: 5),
-                              child: const Text("Play",),
+                              child: const Text(
+                                "Play",
+                              ),
                               onPressed: () async {
                                 setState(() {
                                   hidePlayButton = 1;
@@ -110,6 +112,16 @@ class _gamescreenState extends State<gamescreen> {
                                 }
                                 Text text = findTheWinningTeam();
                                 await _dialogBuilderForWinNote(context, text);
+                                checkGameTerminate();
+                                if (terminateGame == 1) {
+                                  if (team1.getCountingCards() < 1) {
+                                    _dialogBuilderForFinalNote(context,
+                                        const Text("We lost the game"));
+                                  } else {
+                                    _dialogBuilderForFinalNote(
+                                        context, const Text("We won the game"));
+                                  }
+                                }
                                 setState(() {
                                   hideNextButton = 0;
                                 });
@@ -136,6 +148,7 @@ class _gamescreenState extends State<gamescreen> {
                                   startGame();
                                 }
                               });
+                              checkGameTerminate();
                               if (terminateGame == 1) {
                                 if (team1.getCountingCards() <= 1) {
                                   _dialogBuilderForFinalNote(
@@ -301,8 +314,9 @@ class _gamescreenState extends State<gamescreen> {
                                       child: Center(
                                         child: Container(
                                           decoration: BoxDecoration(
-                                            color:const Color(0xFFCCD5DE),
-                                            borderRadius: BorderRadius.circular(20),
+                                            color: const Color(0xFFCCD5DE),
+                                            borderRadius:
+                                                BorderRadius.circular(20),
                                           ),
                                           child: Padding(
                                             padding: const EdgeInsets.all(5.0),
@@ -564,7 +578,7 @@ class _gamescreenState extends State<gamescreen> {
                 style: TextButton.styleFrom(
                   textStyle: Theme.of(context).textTheme.labelLarge,
                 ),
-                child: const Image(image:AssetImage("assets/spades.png")),
+                child: const Image(image: AssetImage("assets/spades.png")),
                 onPressed: () {
                   setState(() {
                     setTrumpManuallyWhenUserSelect(1);
@@ -584,7 +598,7 @@ class _gamescreenState extends State<gamescreen> {
                 style: TextButton.styleFrom(
                   textStyle: Theme.of(context).textTheme.labelLarge,
                 ),
-                child: const Image(image:AssetImage("assets/heart.png")),
+                child: const Image(image: AssetImage("assets/heart.png")),
                 onPressed: () {
                   setState(() {
                     setTrumpManuallyWhenUserSelect(2);
@@ -604,7 +618,7 @@ class _gamescreenState extends State<gamescreen> {
                 style: TextButton.styleFrom(
                   textStyle: Theme.of(context).textTheme.labelLarge,
                 ),
-                child: const Image(image:AssetImage("assets/clubs.png")),
+                child: const Image(image: AssetImage("assets/clubs.png")),
                 onPressed: () {
                   setState(() {
                     setTrumpManuallyWhenUserSelect(3);
@@ -624,7 +638,7 @@ class _gamescreenState extends State<gamescreen> {
                 style: TextButton.styleFrom(
                   textStyle: Theme.of(context).textTheme.labelLarge,
                 ),
-                child: const Image(image:AssetImage("assets/diamond.png")),
+                child: const Image(image: AssetImage("assets/diamond.png")),
                 onPressed: () {
                   setState(() {
                     setTrumpManuallyWhenUserSelect(4);
@@ -742,7 +756,9 @@ class _gamescreenState extends State<gamescreen> {
               onPressed: () {
                 Navigator.of(context).pop();
                 setState(() {
-                  startGameWhenPlayer1Turn();
+                  hideNextButton=1;
+                  hidePlayButton=0;
+                  playAgain();
                 });
               },
             ),

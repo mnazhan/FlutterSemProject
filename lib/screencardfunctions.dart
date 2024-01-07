@@ -682,3 +682,11 @@ void checkGameTerminate(){
   }
 }
 
+void playAgain(){
+  team1.resetCountingCards();
+  team2.resetCountingCards();
+  terminateGame=0;
+  gameTurn =1;
+  startGameWhenPlayer1Turn();
+}
+
