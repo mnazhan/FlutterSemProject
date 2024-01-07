@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 ShapeBorder shape = RoundedRectangleBorder(
     borderRadius: BorderRadius.circular(8),
     side: const BorderSide(color: Colors.black, width: 1));
+ShapeBorder shape1 = RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(0),
+    side: const BorderSide(color: Colors.black, width: 1));
 
 class playingcard extends StatelessWidget {
   final Suit suit;

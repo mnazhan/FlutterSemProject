@@ -333,3 +333,341 @@ Text findTheWinningTeam(){
   print("Team 2 counting cards : ${team2.getCountingCards()}");
   return text;
 }
+
+Widget CreateCountingCardsForTeam1(){
+  late Row row ;
+  int cardCount = team1.getCountingCards();
+  if(cardCount==1){
+    row= Row(
+      children: [
+        Container(
+          height: 30,
+          child: PlayingCardView(
+            card: PlayingCard(Suit.diamonds, CardValue.ace),
+            showBack: true,
+            elevation: 1,
+            shape: shape1,
+          ),
+        ),
+      ],
+    );
+  }else if (cardCount==2){
+    row= Row(
+      children: [
+        Container(
+          height: 30,
+          child: PlayingCardView(
+            card: PlayingCard(Suit.diamonds, CardValue.ace),
+            showBack: true,
+            elevation: 1,
+            shape: shape1,
+          ),
+        ),
+        Container(
+          height: 30,
+          child: PlayingCardView(
+            card: PlayingCard(Suit.diamonds, CardValue.ace),
+            showBack: true,
+            elevation: 1,
+            shape: shape1,
+          ),
+        ),
+      ],
+    );
+  }else if (cardCount==3){
+    row= Row(
+      children: [
+        Container(
+          height: 30,
+          child: PlayingCardView(
+            card: PlayingCard(Suit.diamonds, CardValue.ace),
+            showBack: true,
+            elevation: 1,
+            shape: shape1,
+          ),
+        ),
+        Container(
+          height: 30,
+          child: PlayingCardView(
+            card: PlayingCard(Suit.diamonds, CardValue.ace),
+            showBack: true,
+            elevation: 1,
+            shape: shape1,
+          ),
+        ),
+        Container(
+          height: 30,
+          child: PlayingCardView(
+            card: PlayingCard(Suit.diamonds, CardValue.ace),
+            showBack: true,
+            elevation: 1,
+            shape: shape1,
+          ),
+        ),
+      ],
+    );
+  }else if (cardCount==4){
+    row= Row(
+      children: [
+        Container(
+          height: 30,
+          child: PlayingCardView(
+            card: PlayingCard(Suit.diamonds, CardValue.ace),
+            showBack: true,
+            elevation: 1,
+            shape: shape1,
+          ),
+        ),
+        Container(
+          height: 30,
+          child: PlayingCardView(
+            card: PlayingCard(Suit.diamonds, CardValue.ace),
+            showBack: true,
+            elevation: 1,
+            shape: shape1,
+          ),
+        ),
+        Container(
+          height: 30,
+          child: PlayingCardView(
+            card: PlayingCard(Suit.diamonds, CardValue.ace),
+            showBack: true,
+            elevation: 1,
+            shape: shape1,
+          ),
+        ),
+        Container(
+          height: 30,
+          child: PlayingCardView(
+            card: PlayingCard(Suit.diamonds, CardValue.ace),
+            showBack: true,
+            elevation: 1,
+            shape: shape1,
+          ),
+        ),
+      ],
+    );
+  }else if(cardCount==5){
+    row= Row(
+      children: [
+        Container(
+          height: 30,
+          child: PlayingCardView(
+            card: PlayingCard(Suit.diamonds, CardValue.ace),
+            showBack: true,
+            elevation: 1,
+            shape: shape1,
+          ),
+        ),
+        Container(
+          height: 30,
+          child: PlayingCardView(
+            card: PlayingCard(Suit.diamonds, CardValue.ace),
+            showBack: true,
+            elevation: 1,
+            shape: shape1,
+          ),
+        ),
+        Container(
+          height: 30,
+          child: PlayingCardView(
+            card: PlayingCard(Suit.diamonds, CardValue.ace),
+            showBack: true,
+            elevation: 1,
+            shape: shape1,
+          ),
+        ),
+        Container(
+          height: 30,
+          child: PlayingCardView(
+            card: PlayingCard(Suit.diamonds, CardValue.ace),
+            showBack: true,
+            elevation: 1,
+            shape: shape1,
+          ),
+        ),
+        Container(
+          height: 30,
+          child: PlayingCardView(
+            card: PlayingCard(Suit.diamonds, CardValue.ace),
+            showBack: true,
+            elevation: 1,
+            shape: shape1,
+          ),
+        ),
+      ],
+    );
+  }else{
+    return Text("cards finished");
+  }
+  return row;
+}
+
+Widget CreateCountingCardsForTeam2(){
+  late Row row ;
+  int cardCount = team2.getCountingCards();
+  if(cardCount==1){
+    row= Row(
+      children: [
+        Container(
+          height: 30,
+          child: PlayingCardView(
+            card: PlayingCard(Suit.diamonds, CardValue.ace),
+            showBack: true,
+            elevation: 1,
+            shape: shape1,
+          ),
+        ),
+      ],
+    );
+  }else if (cardCount==2){
+    row= Row(
+      children: [
+        Container(
+          height: 30,
+          child: PlayingCardView(
+            card: PlayingCard(Suit.diamonds, CardValue.ace),
+            showBack: true,
+            elevation: 1,
+            shape: shape1,
+          ),
+        ),
+        Container(
+          height: 30,
+          child: PlayingCardView(
+            card: PlayingCard(Suit.diamonds, CardValue.ace),
+            showBack: true,
+            elevation: 1,
+            shape: shape1,
+          ),
+        ),
+      ],
+    );
+  }else if (cardCount==3){
+    row= Row(
+      children: [
+        Container(
+          height: 30,
+          child: PlayingCardView(
+            card: PlayingCard(Suit.diamonds, CardValue.ace),
+            showBack: true,
+            elevation: 1,
+            shape: shape1,
+          ),
+        ),
+        Container(
+          height: 30,
+          child: PlayingCardView(
+            card: PlayingCard(Suit.diamonds, CardValue.ace),
+            showBack: true,
+            elevation: 1,
+            shape: shape1,
+          ),
+        ),
+        Container(
+          height: 30,
+          child: PlayingCardView(
+            card: PlayingCard(Suit.diamonds, CardValue.ace),
+            showBack: true,
+            elevation: 1,
+            shape: shape1,
+          ),
+        ),
+      ],
+    );
+  }else if (cardCount==4){
+    row= Row(
+      children: [
+        Container(
+          height: 30,
+          child: PlayingCardView(
+            card: PlayingCard(Suit.diamonds, CardValue.ace),
+            showBack: true,
+            elevation: 1,
+            shape: shape1,
+          ),
+        ),
+        Container(
+          height: 30,
+          child: PlayingCardView(
+            card: PlayingCard(Suit.diamonds, CardValue.ace),
+            showBack: true,
+            elevation: 1,
+            shape: shape1,
+          ),
+        ),
+        Container(
+          height: 30,
+          child: PlayingCardView(
+            card: PlayingCard(Suit.diamonds, CardValue.ace),
+            showBack: true,
+            elevation: 1,
+            shape: shape1,
+          ),
+        ),
+        Container(
+          height: 30,
+          child: PlayingCardView(
+            card: PlayingCard(Suit.diamonds, CardValue.ace),
+            showBack: true,
+            elevation: 1,
+            shape: shape1,
+          ),
+        ),
+      ],
+    );
+  }else if(cardCount==5){
+    row= Row(
+      children: [
+        Container(
+          height: 30,
+          child: PlayingCardView(
+            card: PlayingCard(Suit.diamonds, CardValue.ace),
+            showBack: true,
+            elevation: 1,
+            shape: shape1,
+          ),
+        ),
+        Container(
+          height: 30,
+          child: PlayingCardView(
+            card: PlayingCard(Suit.diamonds, CardValue.ace),
+            showBack: true,
+            elevation: 1,
+            shape: shape1,
+          ),
+        ),
+        Container(
+          height: 30,
+          child: PlayingCardView(
+            card: PlayingCard(Suit.diamonds, CardValue.ace),
+            showBack: true,
+            elevation: 1,
+            shape: shape1,
+          ),
+        ),
+        Container(
+          height: 30,
+          child: PlayingCardView(
+            card: PlayingCard(Suit.diamonds, CardValue.ace),
+            showBack: true,
+            elevation: 1,
+            shape: shape1,
+          ),
+        ),
+        Container(
+          height: 30,
+          child: PlayingCardView(
+            card: PlayingCard(Suit.diamonds, CardValue.ace),
+            showBack: true,
+            elevation: 1,
+            shape: shape1,
+          ),
+        ),
+      ],
+    );
+  }else{
+    return Text("cards finished");
+  }
+  return row;
+}

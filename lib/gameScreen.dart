@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:playing_cards/playing_cards.dart';
 import 'screencardfunctions.dart';
 
 int hideNextButton = 1;
@@ -110,16 +109,8 @@ class _gamescreenState extends State<gamescreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Container(
-                  child: Text("Counting cards : 5"),
-                ),
-                Container(
-                  child: Text("Counting cards : 5"),
-                ),
-                Container(
-                  height: 30,
-                  child: PlayingCardView(card: PlayingCard(Suit.clubs, CardValue.nine)),
-                )
+                CreateCountingCardsForTeam1(),
+                CreateCountingCardsForTeam2(),
               ],
             ),
             Expanded(
@@ -520,3 +511,5 @@ class _gamescreenState extends State<gamescreen> {
     );
   }
 }
+
+
