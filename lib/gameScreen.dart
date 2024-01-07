@@ -1,9 +1,11 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:playing_cards/playing_cards.dart';
 import 'screencardfunctions.dart';
 
 int hideNextButton = 1;
 int hidePlayButton = 0;
+int userPermissionNeed =0;
 
 class gamescreen extends StatefulWidget {
   const gamescreen({Key? key}) : super(key: key);
@@ -56,6 +58,7 @@ class _gamescreenState extends State<gamescreen> {
                               print("Biginning player: $beiginner");
                               if (beiginner == 1) {
                                 // print("game waiting for a user click");
+                                userPermissionNeed=1;
                                 await waitForPlayer1Permission();
                                 await whenTrunIsf1();
                               } else if (beiginner == 2) {
@@ -102,6 +105,21 @@ class _gamescreenState extends State<gamescreen> {
                     child: team2Points(),
                   )
                 ]),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Container(
+                  child: Text("Counting cards : 5"),
+                ),
+                Container(
+                  child: Text("Counting cards : 5"),
+                ),
+                Container(
+                  height: 30,
+                  child: PlayingCardView(card: PlayingCard(Suit.clubs, CardValue.nine)),
+                )
               ],
             ),
             Expanded(
@@ -212,8 +230,14 @@ class _gamescreenState extends State<gamescreen> {
                 color: Colors.green,
                 child: createCardHandForPlayer1(
                   () {
-                    userPermission();
-                    print("<<Player 1 card is pressed>>");
+                    if(userPermissionNeed==1){
+                      userPermission();
+                      print("<<Player 1 card is pressed>>");
+                      userPermissionNeed =0;
+                    }else{
+                      print("Wait for your turn");
+                      _dialogBuilderForWaitForTurnNote(context);
+                    }
                   },
                 ),
               ),
@@ -275,6 +299,7 @@ class _gamescreenState extends State<gamescreen> {
     });
     await Future.delayed(Duration(seconds: 3));
     // print("game wait for user click");
+    userPermissionNeed=1;
     await waitForPlayer1Permission();
     setState(() {
       throwPlayer1CardForTapWithCheck();
@@ -297,6 +322,7 @@ class _gamescreenState extends State<gamescreen> {
     });
     await Future.delayed(Duration(seconds: 3));
     // print("game wait for user click");
+    userPermissionNeed=1;
     await waitForPlayer1Permission();
     setState(() {
       throwPlayer1CardForTapWithCheck();
@@ -319,6 +345,7 @@ class _gamescreenState extends State<gamescreen> {
     });
     await Future.delayed(Duration(seconds: 3));
     // print("game wait for user click");
+    userPermissionNeed=1;
     await waitForPlayer1Permission();
     setState(() {
       throwPlayer1CardForTapWithCheck();
@@ -438,12 +465,16 @@ class _gamescreenState extends State<gamescreen> {
   }
 
   Future<void> waitForPlayer1Permission() async {
-    // _dialogBuilderForUserInputNotification(context);
-    while (omi.getPlayer1Permission() != 1) {
-      // Simulate waiting for the variable to become 1
-      print("game waits for a user input");
-      await Future.delayed(const Duration(microseconds: 100));
-    }
+    int value =0;
+      while (omi.getPlayer1Permission() != 1) {
+        if (value==0){
+          _dialogBuilderForUserInputNotification(context);
+          value++;
+        }
+        // Simulate waiting for the variable to become 1
+        print("game waits for a user input");
+        await Future.delayed(const Duration(microseconds: 100));
+      }
   }
 
   Future<void> _dialogBuilderForWinNote(BuildContext context,Text value) {
@@ -452,6 +483,27 @@ class _gamescreenState extends State<gamescreen> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: value,
+          actions: <Widget>[
+            TextButton(
+              style: TextButton.styleFrom(
+                textStyle: Theme.of(context).textTheme.labelLarge,
+              ),
+              child: const Text('close'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+  Future<void> _dialogBuilderForWaitForTurnNote(BuildContext context) {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Wait For your Turn"),
           actions: <Widget>[
             TextButton(
               style: TextButton.styleFrom(
