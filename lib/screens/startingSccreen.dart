@@ -14,7 +14,7 @@ class startScreen extends StatelessWidget {
               child: Text("Start"),
               onPressed: (){
                 print("Move to Game screen");
-                startTheGameWhenPlayer1Trump();
+                startGameWhenPlayer1Turn();
                 Navigator.pushNamed(context, '/first');
               },
             ),

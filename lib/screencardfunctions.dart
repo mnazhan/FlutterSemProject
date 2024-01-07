@@ -8,14 +8,24 @@ import 'package:cardgame/Functions/gameOMI.dart';
 
 Game omi=Game();
 
-void startTheGame(){
-  omi.setCardDec();
-  omi.setPlayersCards();
-  omi.setTrump();
+Game newGame(){
+  Game temp=Game();
+  temp.setTrump();
+  return temp;
 }
-void startTheGameWhenPlayer1Trump(){
-  omi.setCardDec();
-  omi.setPlayersCards();
+
+Game newGameWhenPlayer1Trump(){
+  Game temp=Game();
+  // omi.setTrump();
+  return temp;
+}
+
+void startGame(){
+  omi=newGame();
+}
+
+void startGameWhenPlayer1Turn(){
+  omi=newGameWhenPlayer1Trump();
 }
 
 List<playingcard> cardHand(List<int> values) {

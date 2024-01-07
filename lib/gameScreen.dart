@@ -2,8 +2,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'screencardfunctions.dart';
 
-int hideNextButton = 0;
-int hidePlayButton = 1;
+int hideNextButton = 1;
+int hidePlayButton = 0;
 
 class gamescreen extends StatefulWidget {
   const gamescreen({Key? key}) : super(key: key);
@@ -64,7 +64,6 @@ class _gamescreenState extends State<gamescreen> {
                               }
                             }
                             setState(() {
-                              hidePlayButton =0;
                               hideNextButton =0;
                             });
                           }),
@@ -75,7 +74,11 @@ class _gamescreenState extends State<gamescreen> {
                       FilledButton(
                       child: const Text("Next"),
                       onPressed: () {
-                        startTheGame();
+                        hideNextButton=1;
+                        hidePlayButton=0;
+                        setState(() {
+                          startGame();
+                        });
                       },
                     ),
                   ],
@@ -426,7 +429,7 @@ class _gamescreenState extends State<gamescreen> {
   }
 
   Future<void> waitForPlayer1Permission() async {
-    _dialogBuilderForUserInputNotification(context);
+    // _dialogBuilderForUserInputNotification(context);
     while (omi.getPlayer1Permission() != 1) {
       // Simulate waiting for the variable to become 1
       print("game waits for a user input");
