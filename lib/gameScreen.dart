@@ -2,8 +2,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'screencardfunctions.dart';
 
-int hideStartButton = 0;
-int hidePlayButton = 0;
+int hideNextButton = 0;
+int hidePlayButton = 1;
 
 class gamescreen extends StatefulWidget {
   const gamescreen({Key? key}) : super(key: key);
@@ -62,18 +62,21 @@ class _gamescreenState extends State<gamescreen> {
                               } else {
                                 await whenTrunIsf4();
                               }
-                              // await Future.delayed(Duration(seconds: 2), () {
-                              //   print(
-                              //       'This code runs after a delay of 2 seconds');
-                              // });
                             }
+                            setState(() {
+                              hidePlayButton =0;
+                              hideNextButton =0;
+                            });
                           }),
                     const SizedBox(
                       width: 5,
                     ),
-                    FilledButton(
-                      child: const Text("Start"),
-                      onPressed: () {},
+                    if(hideNextButton==0)
+                      FilledButton(
+                      child: const Text("Next"),
+                      onPressed: () {
+                        startTheGame();
+                      },
                     ),
                   ],
                 ),
@@ -209,7 +212,7 @@ class _gamescreenState extends State<gamescreen> {
           onPressed: () {
             // Add your FAB's functionality here
             print('Floating Action Button Pressed');
-            Navigator.pushNamed(context, '/first');
+            Navigator.pushNamed(context, '/second');
           },
           child: Icon(Icons.preview), // You can customize the icon
         ),

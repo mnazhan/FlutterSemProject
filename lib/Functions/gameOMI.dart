@@ -34,8 +34,8 @@ class Game {
   int _player1CardValue =0;
 
   Game() {
-    setCardDec();
-    setPlayersCards();
+    // setCardDec();
+    // setPlayersCards();
     // setTrump();
   }
   void setCardDec() {
