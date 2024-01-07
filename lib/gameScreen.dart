@@ -419,7 +419,7 @@ class _gamescreenState extends State<gamescreen> {
           ],
         );
       },
-    )
+    );
   }
 
   Future<void> waitForPlayer1Permission() async {
