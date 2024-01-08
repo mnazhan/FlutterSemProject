@@ -440,106 +440,109 @@ class _gamescreenState extends State<gamescreen> {
       int value = throwPlayer1CardWithTheTap();
       print("player 1 to table : $value");
     });
-    await Future.delayed(Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: KtimedelayForOtherPlayers));
     setState(() {
       setCardForPlayer2ToTable();
       print("player 2 card");
     });
-    await Future.delayed(Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: KtimedelayForOtherPlayers));
     setState(() {
       setCardForPlayer3ToTable();
       print("player 3 card");
     });
-    await Future.delayed(Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: KtimedelayForOtherPlayers));
     setState(() {
       setCardForPlayer4ToTable();
       print("player 4 card");
     });
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: KwinnigPlayerTime));
     setState(() {
       findthewinningPlayer();
     });
   }
 
   Future<void> whenTrunIsf2() async {
+    await Future.delayed(const Duration(seconds: KtimedelayForOtherPlayers));
     setState(() {
       setStartingCardForPlayer2ToTable();
       print("player 2 to table");
     });
-    await Future.delayed(Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: KtimedelayForOtherPlayers));
     setState(() {
       setCardForPlayer3ToTable();
       print("player 3 card");
     });
-    await Future.delayed(Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: KtimedelayForOtherPlayers));
     setState(() {
       setCardForPlayer4ToTable();
       print("player 4 card");
     });
-    await Future.delayed(Duration(seconds: 3));
+    // await Future.delayed(const Duration(seconds: KtimedelayForOtherPlayers));
     // print("game wait for user click");
     userPermissionNeed = 1;
     await waitForPlayer1Permission();
     setState(() {
       throwPlayer1CardForTapWithCheck();
     });
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: KwinnigPlayerTime));
     setState(() {
       findthewinningPlayer();
     });
   }
 
   Future<void> whenTrunIsf3() async {
+    await Future.delayed(const Duration(seconds: KtimedelayForOtherPlayers));
     setState(() {
       setStartingCardForPlayer3ToTable();
       print("player 3 to table");
     });
-    await Future.delayed(Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: KtimedelayForOtherPlayers));
     setState(() {
       setCardForPlayer4ToTable();
       print("player 4 card");
     });
-    await Future.delayed(Duration(seconds: 3));
+    // await Future.delayed(const Duration(seconds: KtimedelayForOtherPlayers));
     // print("game wait for user click");
     userPermissionNeed = 1;
     await waitForPlayer1Permission();
     setState(() {
       throwPlayer1CardForTapWithCheck();
     });
-    await Future.delayed(Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: KtimedelayForOtherPlayers));
     setState(() {
       setCardForPlayer2ToTable();
       print("player 2 card");
     });
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: KwinnigPlayerTime));
     setState(() {
       findthewinningPlayer();
     });
   }
 
   Future<void> whenTrunIsf4() async {
+    await Future.delayed(const Duration(seconds: KtimedelayForOtherPlayers));
     setState(() {
       setStartingCardForPlayer4ToTable();
       print("player 4 to table");
     });
-    await Future.delayed(Duration(seconds: 3));
+    // await Future.delayed(const Duration(seconds: KtimedelayForOtherPlayers));
     // print("game wait for user click");
     userPermissionNeed = 1;
     await waitForPlayer1Permission();
     setState(() {
       throwPlayer1CardForTapWithCheck();
     });
-    await Future.delayed(Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: KtimedelayForOtherPlayers));
     setState(() {
       setCardForPlayer2ToTable();
       print("player 2 card");
     });
-    await Future.delayed(Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: KtimedelayForOtherPlayers));
     setState(() {
       setCardForPlayer3ToTable();
       print("player 3 card");
     });
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: KwinnigPlayerTime));
     setState(() {
       findthewinningPlayer();
     });
@@ -678,14 +681,15 @@ class _gamescreenState extends State<gamescreen> {
   Future<void> waitForPlayer1Permission() async {
     int value = 0;
     while (omi.getPlayer1Permission() != 1) {
-      if (value == 0) {
+      if (value == 100) {
         _dialogBuilderForUserInputNotification(context);
-        value++;
       }
+      value++;
       // Simulate waiting for the variable to become 1
-      print("game waits for a user input");
-      await Future.delayed(const Duration(microseconds: 100));
+      print("game waits for a user input: $value");
+      await Future.delayed(const Duration(milliseconds: 100));
     }
+
   }
 
   Future<void> _dialogBuilderForWinNote(BuildContext context, Text value) {

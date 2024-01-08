@@ -26,3 +26,6 @@ const KtitleStyle = TextStyle(
   fontWeight: FontWeight.bold,
   color: Color(0XFFCCD5DE),
 );
+
+const KtimedelayForOtherPlayers = 2;
+const KwinnigPlayerTime =2;
