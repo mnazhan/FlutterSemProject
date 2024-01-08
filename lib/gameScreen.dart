@@ -27,12 +27,6 @@ class _gamescreenState extends State<gamescreen> {
       child: Scaffold(
         body: Container(
           color: const Color(0xFF141E1D),
-          // decoration:const BoxDecoration(
-          //   image: DecorationImage(
-          //     image: AssetImage('assets/background.jpeg'), // Replace with your image asset path
-          //     fit: BoxFit.cover,
-          //   ),
-          // ),
           child: Column(
             children: [
               Container(
@@ -89,8 +83,10 @@ class _gamescreenState extends State<gamescreen> {
                                 });
                                 int beiginnerForTrump = omi.getBeginner();
                                 if (beiginnerForTrump == 1) {
-                                  await _dialogBuilderForTrumpSelection(
-                                      context);
+                                  while(omi.getTrump() ==0){
+                                    await _dialogBuilderForTrumpSelection(
+                                        context);
+                                  }
                                 }
                                 await Future.delayed(
                                     const Duration(seconds: 1));

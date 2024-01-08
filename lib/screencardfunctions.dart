@@ -10,6 +10,7 @@ import 'constans.dart';
 
 Team team1=Team();
 Team team2=Team();
+
 int terminateGame =0;
 int gameTurn =1;
 int beginnerOfTheTurn=1;
