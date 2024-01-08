@@ -1,5 +1,5 @@
 class Team {
-  int _countingCards = 1;
+  int _countingCards = 5;
   Team();
   void resetCountingCards(){
     _countingCards=1;
