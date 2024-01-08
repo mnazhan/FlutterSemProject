@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "463140521176",
+    "project_id": "fluttersemproject",
+    "storage_bucket": "fluttersemproject.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:463140521176:android:35097c240268c999bb43ad",
+        "android_client_info": {
+          "package_name": "com.example.cardgame"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAt_Q-shyHMqYtI9c-hSq_9bNuFva-z44c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
