@@ -72,10 +72,10 @@ class _gamescreenState extends State<gamescreen> {
                         if (hidePlayButton == 0)
                           FilledButton(
                               style: FilledButton.styleFrom(
-                                  backgroundColor: const Color(0xFF272D2D),
-                                  elevation: 5),
+                                  backgroundColor: KbuttonColor, elevation: 5),
                               child: const Text(
                                 "Play",
+                                style: KbuttonText,
                               ),
                               onPressed: () async {
                                 setState(() {
@@ -83,7 +83,7 @@ class _gamescreenState extends State<gamescreen> {
                                 });
                                 int beiginnerForTrump = omi.getBeginner();
                                 if (beiginnerForTrump == 1) {
-                                  while(omi.getTrump() ==0){
+                                  while (omi.getTrump() == 0) {
                                     await _dialogBuilderForTrumpSelection(
                                         context);
                                   }
@@ -128,9 +128,11 @@ class _gamescreenState extends State<gamescreen> {
                         if (hideNextButton == 0)
                           FilledButton(
                             style: FilledButton.styleFrom(
-                                backgroundColor: const Color(0xFF272D2D),
-                                elevation: 5),
-                            child: const Text("Next"),
+                                backgroundColor: KbuttonColor, elevation: 5),
+                            child: const Text(
+                              "Next",
+                              style: KbuttonText,
+                            ),
                             onPressed: () {
                               hideNextButton = 1;
                               hidePlayButton = 0;
@@ -235,9 +237,9 @@ class _gamescreenState extends State<gamescreen> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   // height: 110,
-                  width: 380,
+                  width: 280,
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 5, 40, 5),
+                    padding: const EdgeInsets.fromLTRB(0, 5, 30, 5),
                     child: createCardHandForPlayer3(),
                   ),
                 ),
@@ -413,11 +415,28 @@ class _gamescreenState extends State<gamescreen> {
               const SizedBox(
                 height: 10,
               ),
-              const Center(
-                child: Text(
-                  "You",
-                  style: KplayerStyle,
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  IconButton(
+                      onPressed: () {
+                        print("move setting screen");
+                        Navigator.pushNamed(context, '/third');
+                      },
+                      icon: const Icon(
+                        Icons.info,
+                        color: KbuttonColor,
+                        size: 50,
+                      )),
+                  const Expanded(
+                    child: Center(
+                      child: Text(
+                        "You",
+                        style: KplayerStyle,
+                      ),
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(
                 height: 10,
@@ -431,7 +450,7 @@ class _gamescreenState extends State<gamescreen> {
             print('Floating Action Button Pressed');
             Navigator.pushNamed(context, '/second');
           },
-          child: Icon(Icons.preview), // You can customize the icon
+          child: Icon(Icons.reviews), // You can customize the icon
         ),
       ),
     );
@@ -552,7 +571,7 @@ class _gamescreenState extends State<gamescreen> {
 
   Future<void> throwPlayer1CardForTapWithCheck() async {
     int value = throwPlayer1CardWithTheTap();
-    if (value ==1){
+    if (value == 1) {
       terminateGameWhenUserBreakRules();
       await _dialogBuilderForUserBreakRule(context);
       hideNextButton = 1;
@@ -741,7 +760,6 @@ class _gamescreenState extends State<gamescreen> {
       print("game waits for a user input: $value");
       await Future.delayed(const Duration(milliseconds: 100));
     }
-
   }
 
   Future<void> _dialogBuilderForWinNote(BuildContext context, Text value) {
@@ -812,8 +830,8 @@ class _gamescreenState extends State<gamescreen> {
               onPressed: () {
                 Navigator.of(context).pop();
                 setState(() {
-                  hideNextButton=1;
-                  hidePlayButton=0;
+                  hideNextButton = 1;
+                  hidePlayButton = 0;
                   playAgain();
                 });
               },

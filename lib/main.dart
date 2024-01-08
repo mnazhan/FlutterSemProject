@@ -1,3 +1,4 @@
+import 'package:cardgame/screens/settingScreen.dart';
 import 'package:cardgame/screens/startingSccreen.dart';
 import 'package:cardgame/screens/viewPreviousCards.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => const startScreen(),
         '/first': (context) => const gamescreen(),
         '/second': (context) => const cardsOfPreviousRounds(),
+        '/third' :(context) => const SetingScreen(),
       },
       debugShowCheckedModeBanner: false,
       theme: ThemeData(

@@ -29,3 +29,8 @@ const KtitleStyle = TextStyle(
 
 const KtimedelayForOtherPlayers = 2;
 const KwinnigPlayerTime =2;
+
+const KbuttonColor = Color(0xFFEBDEFF);
+const KbuttonText=TextStyle(
+  color: Colors.black,
+);
