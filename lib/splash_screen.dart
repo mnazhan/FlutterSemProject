@@ -32,8 +32,8 @@ class _SplashScreenState extends State<SplashScreen> {
         decoration: BoxDecoration(
           gradient: RadialGradient(
             colors: [
-              Colors.deepPurple.shade300, // Replace with your start color
-              Colors.deepPurple.shade700, // Replace with your end color
+              Color(0xff141E1D).withOpacity(0.7), // Lighter shade of your hex color
+              Color(0xff141E1D), // Darker shade with some transparency
             ],
           ),
         ),
@@ -48,7 +48,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 height: 260,
               ),
               SizedBox(height: 24),
-              CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Colors.deepPurple.shade900),),
+              CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Color(0xff141E1D)),),
             ],
           ),
         ),

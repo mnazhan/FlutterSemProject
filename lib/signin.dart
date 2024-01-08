@@ -58,7 +58,7 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.deepPurple.shade700,
+      backgroundColor: Color(0xff141E1D),
       body: Column(
         children: <Widget>[
           // Top bar with the time and signal icons
@@ -102,11 +102,11 @@ class _SignInScreenState extends State<SignInScreen> {
                         hintStyle: TextStyle(color: Colors.grey),
                         enabledBorder: UnderlineInputBorder(
                           borderSide:
-                              BorderSide(color: Colors.deepPurpleAccent),
+                              BorderSide(color: Color(0xff141E1D)),
                         ),
                         focusedBorder: UnderlineInputBorder(
                           borderSide:
-                              BorderSide(color: Colors.deepPurpleAccent),
+                              BorderSide(color: Color(0xff141E1D)),
                         ),
                       ),
                     ),
@@ -120,11 +120,11 @@ class _SignInScreenState extends State<SignInScreen> {
                         hintStyle: TextStyle(color: Colors.grey),
                         enabledBorder: UnderlineInputBorder(
                           borderSide:
-                              BorderSide(color: Colors.deepPurpleAccent),
+                              BorderSide(color: Color(0xff141E1D)),
                         ),
                         focusedBorder: UnderlineInputBorder(
                           borderSide:
-                              BorderSide(color: Colors.deepPurpleAccent),
+                              BorderSide(color: Color(0xff141E1D)),
                         ),
                       ),
                     ),
@@ -132,7 +132,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     ElevatedButton(
                       onPressed: _signIn,
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.deepPurple, // Button color
+                        primary: Color(0xff141E1D), // Button color
                         onPrimary: Colors.white, // Text color
                       ),
                       child: const Text('Sign In'),
@@ -147,7 +147,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       },
                       child: const Text(
                         'Don\'t have an account? Sign up',
-                        style: TextStyle(color: Colors.deepPurple),
+                        style: TextStyle(color: Color(0xff141E1D)),
                       ),
                     ),
                   ],
@@ -166,10 +166,10 @@ class _SignInScreenState extends State<SignInScreen> {
         hintText: hint,
         hintStyle: const TextStyle(color: Colors.grey),
         enabledBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.deepPurpleAccent),
+          borderSide: BorderSide(color: Color(0xff141E1D)),
         ),
         focusedBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.deepPurpleAccent),
+          borderSide: BorderSide(color: Color(0xff141E1D)),
         ),
       ),
       obscureText: isPassword,

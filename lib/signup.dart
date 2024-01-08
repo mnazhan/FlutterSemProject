@@ -51,7 +51,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.deepPurple,
+      backgroundColor: Color(0xff141E1D),
       body: Column(
         children: <Widget>[
           // Top bar with the time and signal icons
@@ -94,10 +94,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         // border: OutlineInputBorder(),
                         hintStyle: TextStyle(color: Colors.grey),
                         enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.deepPurpleAccent),
+                          borderSide: BorderSide(color: Color(0xff141E1D)),
                         ),
                         focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.deepPurpleAccent),
+                          borderSide: BorderSide(color: Color(0xff141E1D)),
                         ),
                       ),
                     ),
@@ -110,10 +110,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         // border: OutlineInputBorder(),
                         hintStyle: TextStyle(color: Colors.grey),
                         enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.deepPurpleAccent),
+                          borderSide: BorderSide(color: Color(0xff141E1D)),
                         ),
                         focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.deepPurpleAccent),
+                          borderSide: BorderSide(color: Color(0xff141E1D)),
                         ),
                       ),
                     ),
@@ -126,10 +126,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         // border: OutlineInputBorder(),
                         hintStyle: TextStyle(color: Colors.grey),
                         enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.deepPurpleAccent),
+                          borderSide: BorderSide(color: Color(0xff141E1D)),
                         ),
                         focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.deepPurpleAccent),
+                          borderSide: BorderSide(color: Color(0xff141E1D)),
                         ),
                       ),
                     ),
@@ -137,7 +137,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ElevatedButton(
                       onPressed: _signUp,
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.deepPurple, // Button color
+                        primary: Color(0xff141E1D), // Button color
                         onPrimary: Colors.white, // Text color
                       ),
                       child: const Text('Sign Up'),
@@ -149,7 +149,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             MaterialPageRoute(builder: (context) => const SignInScreen()));
                       },
                       child: const Text('Already have an account? Sign In',
-                        style: TextStyle(color: Colors.deepPurple),
+                        style: TextStyle(color: Color(0xff141E1D)),
                       ),
                     ),
 
@@ -170,10 +170,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
         hintText: hint,
         hintStyle: const TextStyle(color: Colors.grey),
         enabledBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.deepPurpleAccent),
+          borderSide: BorderSide(color: Color(0xff141E1D)),
         ),
         focusedBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.deepPurpleAccent),
+          borderSide: BorderSide(color: Color(0xff141E1D)),
         ),
       ),
       obscureText: isPassword,
