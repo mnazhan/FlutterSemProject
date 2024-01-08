@@ -14,11 +14,11 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Timer(
-      Duration(seconds: 5),
+      const Duration(seconds: 5),
       () {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (context) => SignInScreen(),
+            builder: (context) => const SignInScreen(),
           ),
         );
       },
@@ -32,8 +32,10 @@ class _SplashScreenState extends State<SplashScreen> {
         decoration: BoxDecoration(
           gradient: RadialGradient(
             colors: [
-              Color(0xff141E1D).withOpacity(0.7), // Lighter shade of your hex color
-              Color(0xff141E1D), // Darker shade with some transparency
+              const Color(0xff141E1D).withOpacity(0.7),
+              // Lighter shade of your hex color
+              const Color(0xff141E1D),
+              // Darker shade with some transparency
             ],
           ),
         ),
@@ -47,8 +49,10 @@ class _SplashScreenState extends State<SplashScreen> {
                 width: 260,
                 height: 260,
               ),
-              SizedBox(height: 24),
-              CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Color(0xff141E1D)),),
+              const SizedBox(height: 24),
+              const CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(Color(0xff141E1D)),
+              ),
             ],
           ),
         ),

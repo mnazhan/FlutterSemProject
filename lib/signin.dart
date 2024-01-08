@@ -1,10 +1,11 @@
+import 'package:cardgame/Functions/form_container_widget.dart';
 import 'package:cardgame/screens/startingSccreen.dart';
 import 'package:cardgame/signup.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import 'firebase_auth_services.dart';
+import 'global/common/toast.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({Key? key}) : super(key: key);
@@ -14,11 +15,11 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
-
   final FirebaseAuthService _auth = FirebaseAuthService();
-
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
+  bool _isSigning = false;
 
   @override
   void dispose() {
@@ -26,34 +27,6 @@ class _SignInScreenState extends State<SignInScreen> {
     _passwordController.dispose();
     super.dispose();
   }
-
-
-  // void _signIn() {
-  //   // Implement your sign-in logic here
-  //   FirebaseAuth.instance.signInWithEmailAndPassword(
-  //       email: _emailController.text, password: _passwordController.text).then((
-  //       value) {
-  //     Navigator.push(
-  //         context,
-  //         MaterialPageRoute(builder: (context) => const startScreen()));
-  //   }).onError((error, stackTrace) {
-  //     print("error is ${error}");
-  //   });
-  // }
-
-
-
-  void _signIn() async{
-    // String username = _usernameController.text;
-    String email = _emailController.text;
-    String password = _passwordController.text;
-
-    User? user = await _auth.signInWithEmailAndPassword(email, password);
-
-
-      Navigator.push(context, MaterialPageRoute(builder: (context)=> startScreen()));
-
-    }
 
   @override
   Widget build(BuildContext context) {
@@ -93,40 +66,16 @@ class _SignInScreenState extends State<SignInScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
-                    TextField(
+                    FormContainerWidget(
                       controller: _emailController,
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: const InputDecoration(
-                        labelText: 'Email',
-                        // border: OutlineInputBorder(),
-                        hintStyle: TextStyle(color: Colors.grey),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Color(0xff141E1D)),
-                        ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Color(0xff141E1D)),
-                        ),
-                      ),
+                      hintText: "Username",
+                      isPasswordField: false,
                     ),
                     const SizedBox(height: 16.0),
-                    TextField(
+                    FormContainerWidget(
                       controller: _passwordController,
-                      obscureText: true,
-                      decoration: const InputDecoration(
-                        labelText: 'Password',
-                        // border: OutlineInputBorder(),
-                        hintStyle: TextStyle(color: Colors.grey),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Color(0xff141E1D)),
-                        ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Color(0xff141E1D)),
-                        ),
-                      ),
+                      hintText: "Password",
+                      isPasswordField: true,
                     ),
                     const SizedBox(height: 40.0),
                     ElevatedButton(
@@ -175,4 +124,39 @@ class _SignInScreenState extends State<SignInScreen> {
       obscureText: isPassword,
     );
   }
+
+  void _signIn() async {
+    setState(() {
+      _isSigning = true;
+    });
+
+    String email = _emailController.text;
+    String password = _passwordController.text;
+
+    User? user = await _auth.signInWithEmailAndPassword(email, password);
+
+    setState(() {
+      _isSigning = false;
+    });
+
+    if (user != null) {
+      showToast(message: "User is successfully signed in");
+      Navigator.pushNamed(context, "/");
+    } else {
+      // showToast(message: "some error occured");
+    }
+  }
 }
+
+// void _signIn() {
+//   // Implement your sign-in logic here
+//   FirebaseAuth.instance.signInWithEmailAndPassword(
+//       email: _emailController.text, password: _passwordController.text).then((
+//       value) {
+//     Navigator.push(
+//         context,
+//         MaterialPageRoute(builder: (context) => const startScreen()));
+//   }).onError((error, stackTrace) {
+//     print("error is ${error}");
+//   });
+// }
