@@ -546,12 +546,18 @@ class _gamescreenState extends State<gamescreen> {
 
   Future<void> throwPlayer1CardForTapWithCheck() async {
     int value = throwPlayer1CardWithTheTap();
-    while (value != 0) {
-      print("inside while");
-      await waitForPlayer1Permission();
-      print("recall function to throw palyer 1 card  ");
-      value = await throwPlayer1CardWithTheTap();
+    if (value ==1){
+      terminateGameWhenUserBreakRules();
+      await _dialogBuilderForUserBreakRule(context);
+      hideNextButton = 1;
+      hidePlayButton = 0;
     }
+    // while (value != 0) {
+    //   print("inside while");
+    //   await waitForPlayer1Permission();
+    //   print("recall function to throw palyer 1 card  ");
+    //   value = await throwPlayer1CardWithTheTap();
+    // }
     print("player 1 card");
   }
 
@@ -666,6 +672,50 @@ class _gamescreenState extends State<gamescreen> {
               child: const Text('close'),
               onPressed: () {
                 Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> _dialogBuilderForUserBreakRule(BuildContext context) {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('You Break the Rule of the game'),
+          actions: <Widget>[
+            TextButton(
+              style: TextButton.styleFrom(
+                textStyle: Theme.of(context).textTheme.labelLarge,
+              ),
+              child: const Text('close'),
+              onPressed: () {
+                Navigator.of(context).pop();
+                hideNextButton = 0;
+                hidePlayButton = 1;
+                setState(() {
+                  if (gameTurn == 5 ||
+                      gameTurn == 9 ||
+                      gameTurn == 13 ||
+                      gameTurn == 17) {
+                    startGameWhenPlayer1Turn();
+                  } else {
+                    startGame();
+                  }
+                });
+                checkGameTerminate();
+                if (terminateGame == 1) {
+                  if (team1.getCountingCards() <= 1) {
+                    _dialogBuilderForFinalNote(
+                        context, const Text("We lost the game"));
+                  } else {
+                    _dialogBuilderForFinalNote(
+                        context, const Text("We won the game"));
+                  }
+                }
               },
             ),
           ],

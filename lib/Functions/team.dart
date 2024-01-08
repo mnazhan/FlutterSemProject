@@ -14,4 +14,7 @@ class Team {
   void reduce2CountingCards(){
     _countingCards=_countingCards-2;
   }
+  void detect3Cards(){
+    _countingCards=_countingCards-3;
+  }
 }

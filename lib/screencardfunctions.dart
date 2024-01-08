@@ -291,7 +291,7 @@ int throwPlayer1CardWithTheTap() {
   int returnvalue=0;
   int value = omi.getPlayer1CardValue();
   omi.throwPlayer1CardManually(value);
-  if(omi.getPlayer1CardValue()==0){
+  if(omi.userBreakTheRule==1){
     returnvalue=1;
   }
   print("<<screenFunctions.dart throw player1 card with tap");
@@ -689,5 +689,9 @@ void playAgain(){
   terminateGame=0;
   gameTurn =1;
   startGameWhenPlayer1Turn();
+}
+
+void terminateGameWhenUserBreakRules(){
+  team1.detect3Cards();
 }
 

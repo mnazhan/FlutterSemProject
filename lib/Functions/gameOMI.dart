@@ -32,6 +32,7 @@ class Game {
   List<int> _turn = [1, 2, 3, 4];
   int _player1Permission = 0;
   int _player1CardValue =0;
+  int userBreakTheRule =0;
 
   Game(int value) {
     setCardDec();
@@ -765,19 +766,27 @@ class Game {
           card4Values.add(player1CardHand[i]);
         }
       }
+      print("Spades number : ${card1Values.length}");
+      print("Heart number : ${card2Values.length}");
+      print("Clubs number : ${card3Values.length}");
+      print("Diamond number : ${card4Values.length}");
+
       int FirstCardOfTheRound = _Table[0];
+      print("first card of table : $FirstCardOfTheRound");
       FirstCardKindom = getValueKindom(FirstCardOfTheRound);
       valueKind = getValueKindom(value);
+      print("First card kindom : $FirstCardKindom");
+      print("Tap card kindom : $valueKind");
       if (FirstCardKindom==valueKind){
         setTable(value);
         player1CardHand.remove(value);
       }else{
         late int valueKindCardNo;
-        if(valueKind == 1){
+        if(FirstCardKindom == 1){
           valueKindCardNo=card1Values.length;
-        }else if(valueKind==2){
+        }else if(FirstCardKindom==2){
           valueKindCardNo=card2Values.length;
-        }else if(valueKind==3){
+        }else if(FirstCardKindom==3){
           valueKindCardNo=card3Values.length;
         }else {
           valueKindCardNo=card4Values.length;
@@ -787,8 +796,9 @@ class Game {
           player1CardHand.remove(value);
         }else{
           print("<<<choose an acceptable card>>>");
-          setTable(value);
-          player1CardHand.remove(value);
+          userBreakTheRule=1;
+          // setTable(value);
+          // player1CardHand.remove(value);
           // resetPlayer1CardValue();
           // setPlayer1Permission(0);
         }
