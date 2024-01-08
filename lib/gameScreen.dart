@@ -191,7 +191,7 @@ class _gamescreenState extends State<gamescreen> {
                 ),
               ),
               const SizedBox(
-                height: 15,
+                height: 10,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -219,7 +219,7 @@ class _gamescreenState extends State<gamescreen> {
                 ],
               ),
               const SizedBox(
-                height: 30,
+                height: 15,
               ),
               const Center(
                 child: Text(
@@ -227,16 +227,19 @@ class _gamescreenState extends State<gamescreen> {
                   style: KplayerStyle,
                 ),
               ),
-              Container(
-                decoration: BoxDecoration(
-                  color: const Color(0xFF446062),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                height: 110,
-                width: 210,
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 3, 17, 3),
-                  child: createCardHandForPlayer3(),
+              Expanded(
+                flex: 1,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF446062),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  // height: 110,
+                  width: 380,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 5, 40, 5),
+                    child: createCardHandForPlayer3(),
+                  ),
                 ),
               ),
               Expanded(
@@ -253,7 +256,7 @@ class _gamescreenState extends State<gamescreen> {
                             ),
                             const Text(
                               "Player 4",
-                              style: KteamStyle,
+                              style: KplayerStyle,
                             ),
                             const SizedBox(
                               height: 20,
@@ -356,7 +359,7 @@ class _gamescreenState extends State<gamescreen> {
                         ),
                         const Text(
                           "Player 2",
-                          style: KteamStyle,
+                          style: KplayerStyle,
                         ),
                         const SizedBox(
                           height: 20,
@@ -381,26 +384,29 @@ class _gamescreenState extends State<gamescreen> {
                   ],
                 ),
               ),
-              Container(
-                decoration: BoxDecoration(
-                  color: const Color(0xFF446062),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                height: 170,
-                width: 380,
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 5, 40, 5),
-                  child: createCardHandForPlayer1(
-                    () {
-                      if (userPermissionNeed == 1) {
-                        userPermission();
-                        print("<<Player 1 card is pressed>>");
-                        userPermissionNeed = 0;
-                      } else {
-                        print("Wait for your turn");
-                        _dialogBuilderForWaitForTurnNote(context);
-                      }
-                    },
+              Expanded(
+                flex: 1,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF446062),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  // height: 170,
+                  width: 380,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 5, 40, 5),
+                    child: createCardHandForPlayer1(
+                      () {
+                        if (userPermissionNeed == 1) {
+                          userPermission();
+                          print("<<Player 1 card is pressed>>");
+                          userPermissionNeed = 0;
+                        } else {
+                          print("Wait for your turn");
+                          _dialogBuilderForWaitForTurnNote(context);
+                        }
+                      },
+                    ),
                   ),
                 ),
               ),
@@ -414,7 +420,7 @@ class _gamescreenState extends State<gamescreen> {
                 ),
               ),
               const SizedBox(
-                height: 35,
+                height: 10,
               )
             ],
           ),
