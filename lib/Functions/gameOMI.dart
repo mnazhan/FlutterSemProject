@@ -1021,8 +1021,6 @@ class Game {
     } else {
       addPointToTeam2();
     }
-    setBeginner(winingPlayer);
-    setTurn(winingPlayer);
 
     //save table into rounds records
     if (getRound() == 1) {
@@ -1042,6 +1040,8 @@ class Game {
     } else {
       setRound8();
     }
+    setBeginner(winingPlayer);
+    setTurn(winingPlayer);
     resetPlayer1CardValue();
     increaseRound();
     clearTable();
